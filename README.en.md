@@ -5,14 +5,14 @@
 Desktop application in C# to help manage tasks, set deadlines, prioritize, and tag them. It allows sorting tasks by various parameters, marking completed tasks, creating recurring tasks, and setting reminders. Perfect for efficient time and task management.
 
 Features
-> Task creation: the user can create a new task by specifying its name, description, deadline, priority, and tags.
-> Task viewing: the user can sort all tasks by creation date, deadline, priority, or tags, and view only completed or only incomplete tasks.
-> Task editing: the user can edit the name, description, deadline, priority, or tags of a task.
-> Task deletion: the user can delete an unnecessary task.
-> Marking a task as completed: after completing a task, the user can mark it as completed.
-> Recurring tasks: the user can create recurring tasks that will automatically resume after a certain interval of time.
-> Reminders: before the task deadline, the application can send a reminder to the user about its approaching.
-> Synchronization: tasks can be automatically synchronized between the user's devices through a specific service.
+* Task creation: the user can create a new task by specifying its name, description, deadline, priority, and tags.
+* Task viewing: the user can sort all tasks by creation date, deadline, priority, or tags, and view only completed or only incomplete tasks.
+* Task editing: the user can edit the name, description, deadline, priority, or tags of a task.
+* Task deletion: the user can delete an unnecessary task.
+* Marking a task as completed: after completing a task, the user can mark it as completed.
+* Recurring tasks: the user can create recurring tasks that will automatically resume after a certain interval of time.
+* Reminders: before the task deadline, the application can send a reminder to the user about its approaching.
+* Synchronization: tasks can be automatically synchronized between the user's devices through a specific service.
 
 Installation for use
 ```
