@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using TaskManager.ViewModels;
 
 namespace TaskManager.Views
 {
@@ -10,6 +11,7 @@ namespace TaskManager.Views
         public MainWindow()
         {
             InitializeComponent();
+            BarPanel.DataContext = new MenuViewModel(this);
         }
     }
 }

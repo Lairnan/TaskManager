@@ -3,8 +3,36 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:TaskManager.Views.Controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-    </Grid>
+        AllowsTransparency="True"
+        WindowStyle="None"
+        ResizeMode="CanResizeWithGrip"
+        WindowStartupLocation="CenterScreen"
+        Title="Главное окно"
+        Height="600"
+        Width="800">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0"
+                      GlassFrameThickness="0"
+                      NonClientFrameEdges="None"
+                      ResizeBorderThickness="5"/>
+    </WindowChrome.WindowChrome>
+    
+    <controls:MenuBarPanel x:Name="BarPanel">
+        <Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+            <!-- Main menu panel -->
+            <Menu Background="Transparent" Foreground="White">
+                <MenuItem Header="Создать"/>
+                <MenuItem Header="Просмотр"/>
+                <MenuItem Header="Синхронизация"/>
+            </Menu>
+        </Grid>
+    </controls:MenuBarPanel>
+    
 </Window>
