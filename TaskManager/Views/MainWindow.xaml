@@ -5,20 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:TaskManager.Views.Controls"
         mc:Ignorable="d"
-        AllowsTransparency="True"
-        WindowStyle="None"
-        ResizeMode="CanResizeWithGrip"
+        Style="{StaticResource WindowStyle}"
         WindowStartupLocation="CenterScreen"
         Title="Главное окно"
         Height="600"
         Width="800">
-
-    <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="0"
-                      GlassFrameThickness="0"
-                      NonClientFrameEdges="None"
-                      ResizeBorderThickness="5"/>
-    </WindowChrome.WindowChrome>
     
     <controls:MenuBarPanel x:Name="BarPanel">
         <Grid>

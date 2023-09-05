@@ -11,23 +11,23 @@
 
     <UserControl.Template>
         <ControlTemplate TargetType="UserControl">
-            <Border>
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseEnter">
-                        <behaviors:InvokeCommandAction Command="{Binding MouseEnterCommand}"/>
-                    </i:EventTrigger>
-                    <i:EventTrigger EventName="MouseLeftButtonDown">
-                        <behaviors:InvokeCommandAction Command="{Binding MouseLeftButtonDownCommand}" PassEventArgsToCommand="True"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-                
-                <Grid Background="#333">
+            <Border Background="#333">
+                <Grid Margin="15">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
                     
                     <Grid Grid.Row="0">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseEnter">
+                                <behaviors:InvokeCommandAction Command="{Binding MouseEnterCommand}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                <behaviors:InvokeCommandAction Command="{Binding MouseLeftButtonDownCommand}" PassEventArgsToCommand="True"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition/>
@@ -57,15 +57,33 @@
                         </TextBlock>
                         <StackPanel Grid.Column="2"
                                     Orientation="Horizontal">
-                            <Button Margin="3 0" Width="40" Command="{Binding MinimizeCommand}">
-                                <TextBlock Text="0" FontFamily="Webdings" TextAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
-                            </Button>
-                            <Button Margin="3 0" Width="40" Command="{Binding SwitchStateCommand}">
-                                <TextBlock Text="{Binding WindowCurrentState}" FontFamily="Webdings" TextAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
-                            </Button>
-                            <Button Margin="3 0" Width="40" Command="{Binding CloseCommand}">
-                                <TextBlock Text="r" FontFamily="Webdings" TextAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
-                            </Button>
+                            <Button Margin="3 0"
+                                    Padding="0"
+                                    Width="40"
+                                    Command="{Binding MinimizeCommand}"
+                                    Style="{StaticResource MainUpButtonStyle}"
+                                    HorizontalContentAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    Content="0"
+                                    FontFamily="Webdings"/>
+                            <Button Margin="3 0"
+                                    Padding="0"
+                                    Width="40"
+                                    Command="{Binding SwitchStateCommand}"
+                                    Style="{StaticResource MainUpButtonStyle}"
+                                    HorizontalContentAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    Content="{Binding WindowCurrentState}"
+                                    FontFamily="Webdings"/>
+                            <Button Margin="3 0"
+                                    Padding="0"
+                                    Width="40"
+                                    Command="{Binding CloseCommand}"
+                                    Style="{StaticResource MainUpButtonStyle}"
+                                    HorizontalContentAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    Content="r"
+                                    FontFamily="Webdings"/>
                         </StackPanel>
                     </Grid>
                     <ContentPresenter Grid.Row="1" />

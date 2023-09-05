@@ -19,10 +19,10 @@ public class MenuViewModel : BindableBase
     public ICommand? SwitchStateCommand { get; }
     public ICommand? MouseLeftButtonDownCommand { get; }
     public ICommand? MouseEnterCommand { get; }
-    
-    private readonly Window _window = new();
 
-    private string _windowCurrentState = "2";
+    private readonly Window _window;
+
+    private string _windowCurrentState = "1";
     public string WindowCurrentState
     {
         get => _windowCurrentState;
@@ -56,6 +56,7 @@ public class MenuViewModel : BindableBase
         
         var helper = new WindowInteropHelper(_window);
         SendMessage(helper.Handle, 161, 2, 0);
+        WindowCurrentState = _window.WindowState == WindowState.Maximized ? "2" : "1";
     }
 
     private void OnMouseEnter()
