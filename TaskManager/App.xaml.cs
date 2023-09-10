@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.IO;
 using System.Windows;
+using TaskManager.Models;
 
 namespace TaskManager
 {
@@ -13,5 +9,14 @@ namespace TaskManager
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            if (File.Exists(TaskManageContext.DbName)) return;
+            
+            using var db = new TaskManageContext();
+            db.Database.EnsureCreated();
+        }
     }
 }
