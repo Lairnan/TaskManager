@@ -11,7 +11,6 @@ namespace TaskManager.Views
         public MainWindow()
         {
             InitializeComponent();
-            BarPanel.DataContext = new MenuViewModel(this);
         }
     }
 }

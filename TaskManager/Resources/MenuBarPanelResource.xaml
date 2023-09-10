@@ -1,16 +1,14 @@
-﻿<UserControl x:Class="TaskManager.Views.Controls.MenuBarPanel"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vm="clr-namespace:TaskManager.ViewModels"
-             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:behaviors="clr-namespace:Microsoft.Xaml.Behaviors;assembly=Microsoft.Xaml.Behaviors"
-             d:DataContext="{d:DesignInstance Type=vm:MenuViewModel, IsDesignTimeCreatable=True}"
-             mc:Ignorable="d">
-
-    <UserControl.Template>
-        <ControlTemplate TargetType="UserControl">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:controls="clr-namespace:TaskManager.Controls"
+                    xmlns:vm="clr-namespace:TaskManager.ViewModels"
+                    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+                    xmlns:behaviors="clr-namespace:Microsoft.Xaml.Behaviors;assembly=Microsoft.Xaml.Behaviors"
+                    d:DataContext="{d:DesignInstance Type=vm:MenuViewModel, IsDesignTimeCreatable=True}"
+                    mc:Ignorable="d">
+    <ControlTemplate TargetType="{x:Type controls:MenuBarPanel}" x:Key="MenuBarPanelTemplate">
             <Border Background="#333">
                 <Grid Margin="15">
                     <Grid.RowDefinitions>
@@ -30,6 +28,7 @@
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
@@ -44,7 +43,8 @@
                                        Margin="0 5 5 0"
                                        Text="Task Manager"/>
                         </StackPanel>
-                        <TextBlock Grid.Column="1"
+                        <ContentPresenter Grid.Column="1" ContentSource="Header" VerticalAlignment="Center" />
+                        <TextBlock Grid.Column="2"
                                    TextAlignment="Center"
                                    VerticalAlignment="Center"
                                    FontSize="18"
@@ -55,7 +55,7 @@
                                 <Binding RelativeSource="{RelativeSource Mode=Self}" Path="Text"/>
                             </TextBlock.ToolTip>
                         </TextBlock>
-                        <StackPanel Grid.Column="2"
+                        <StackPanel Grid.Column="3"
                                     Orientation="Horizontal">
                             <Button Margin="3 0"
                                     Padding="0"
@@ -86,9 +86,8 @@
                                     FontFamily="Webdings"/>
                         </StackPanel>
                     </Grid>
-                    <ContentPresenter Grid.Row="1" />
+                    <ContentPresenter ContentSource="Content" Grid.Row="1" />
                 </Grid>
             </Border>
         </ControlTemplate>
-    </UserControl.Template>
-</UserControl>
+</ResourceDictionary>

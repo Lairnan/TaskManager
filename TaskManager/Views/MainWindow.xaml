@@ -3,27 +3,33 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:controls="clr-namespace:TaskManager.Views.Controls"
+        xmlns:controls="clr-namespace:TaskManager.Controls"
         mc:Ignorable="d"
         Style="{StaticResource WindowStyle}"
         WindowStartupLocation="CenterScreen"
         Title="Главное окно"
-        Height="600"
-        Width="800">
+        Height="500"
+        MinHeight="500"
+        MinWidth="700"
+        Width="700">
     
-    <controls:MenuBarPanel x:Name="BarPanel">
-        <Grid>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition/>
-			</Grid.RowDefinitions>
+    <controls:MenuBarPanel Template="{StaticResource MenuBarPanelTemplate}">
+        <controls:MenuBarPanel.Header>
             <!-- Main menu panel -->
             <Menu Background="Transparent" Foreground="White">
                 <MenuItem Header="Создать"/>
                 <MenuItem Header="Просмотр"/>
                 <MenuItem Header="Синхронизация"/>
             </Menu>
-        </Grid>
+        </controls:MenuBarPanel.Header>
+        <controls:MenuBarPanel.Content>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+            </Grid>
+        </controls:MenuBarPanel.Content>
     </controls:MenuBarPanel>
     
 </Window>
