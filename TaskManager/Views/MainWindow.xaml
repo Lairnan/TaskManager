@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        DataContext="{Binding Source={StaticResource VmLocator}, Path=MainViewModel}"
         xmlns:controls="clr-namespace:TaskManager.Controls"
         mc:Ignorable="d"
         Style="{StaticResource WindowStyle}"
@@ -30,6 +31,7 @@
                 </Grid.RowDefinitions>
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">
 					<Button Style="{StaticResource MainButtonStyle}"
+					        Command="{Binding ShowSettingsCommand}"
 							Padding="3">
 						<Button.Content>
 							<Image Width="27"
@@ -42,6 +44,13 @@
 							   VerticalAlignment="Center"
 							   Margin="5 0"/>
 				</StackPanel>
+	            <StackPanel Grid.Row="1" HorizontalAlignment="Left">
+		            <Button Style="{StaticResource MainButtonStyle}"
+		                    Command="{Binding TestCommand}"
+		                    Padding="3"
+		                    FontSize="16"
+		                    Content="Test Button"/>
+	            </StackPanel>
             </Grid>
         </controls:MenuBarPanel.Content>
     </controls:MenuBarPanel>

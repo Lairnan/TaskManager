@@ -1,14 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using TaskManager.Models.Entities;
 
 namespace TaskManager.Models;
 
-public interface IDbEntity { }
+public interface IDbEntity { Guid Id { get; set; } }
 
 public class TaskManageContext : DbContext
 {
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
-        optionsBuilder.UseSqlite("Data Source=TaskManager.db");
+    public TaskManageContext(DbContextOptions<TaskManageContext> options) : base(options) { }
 
     public DbSet<Task> Tasks { get; set; }
     public DbSet<Tag> Tags { get; set; }
