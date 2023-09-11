@@ -2,7 +2,7 @@
 
 namespace TaskManager.Models.Entities;
 
-public class Reminder
+public class Reminder : IDbEntity
 {
     public Reminder() { Id = new Guid(); }
     

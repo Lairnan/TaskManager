@@ -2,7 +2,7 @@
 
 namespace TaskManager.Models.Entities;
 
-public class Tag
+public class Tag : IDbEntity
 {
     public int Id { get; set; }
     public string Name { get; set; }

@@ -3,6 +3,8 @@ using TaskManager.Models.Entities;
 
 namespace TaskManager.Models;
 
+public interface IDbEntity { }
+
 public class TaskManageContext : DbContext
 {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>

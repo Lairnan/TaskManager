@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TaskManager.Models.Entities;
 
-public class Task
+public class Task : IDbEntity
 {
     public Task() { Id = new Guid(); }
     

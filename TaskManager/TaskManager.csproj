@@ -24,6 +24,7 @@
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
       <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
       <PackageReference Include="Prism.Core" Version="8.1.97" />
       <PackageReference Include="Prism.Wpf" Version="8.1.97" />
     </ItemGroup>
@@ -32,5 +33,6 @@
       <None Remove="Images\logo.png" />
       <Resource Include="Images\logo.png" />
     </ItemGroup>
+
 
 </Project>
