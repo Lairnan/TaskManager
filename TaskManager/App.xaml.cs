@@ -13,10 +13,8 @@ namespace TaskManager
         {
             base.OnStartup(e);
 
-            if (File.Exists(TaskManageContext.DbName)) return;
-            
-            using var db = new TaskManageContext();
-            db.Database.EnsureCreated();
+            /*using var db = new TaskManageContext();
+            db.Database.EnsureCreated();*/
         }
     }
 }

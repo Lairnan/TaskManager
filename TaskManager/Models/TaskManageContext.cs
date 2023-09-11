@@ -5,10 +5,8 @@ namespace TaskManager.Models;
 
 public class TaskManageContext : DbContext
 {
-    public const string DbName = "TaskManager.db";
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
-        optionsBuilder.UseSqlite($"Data Source={DbName}");
+        optionsBuilder.UseSqlite($"Data Source=TaskManager.db");
 
     public DbSet<Task> Tasks { get; set; }
     public DbSet<Tag> Tags { get; set; }
