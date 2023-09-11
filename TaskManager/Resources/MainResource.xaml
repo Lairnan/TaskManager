@@ -20,56 +20,91 @@
         <Setter Property="TextBox.IsTabStop" Value="False" />
     </Style>
 
-    <Style TargetType="TextBlock" x:Key="TextBlockStyle" BasedOn="{StaticResource MainStyle}">
-    </Style>
+	<Style TargetType="TextBlock" x:Key="TextBlockStyle" BasedOn="{StaticResource MainStyle}">
+	</Style>
 
-    <Style TargetType="Button" x:Key="OwnButtonStyle" BasedOn="{StaticResource MainStyle}">
-    </Style>
-
-    <Style TargetType="Label" x:Key="LabelStyle" BasedOn="{StaticResource MainStyle}">
+	<Style TargetType="Label" x:Key="LabelStyle" BasedOn="{StaticResource MainStyle}">
     </Style>
 
     <Style TargetType="TextBox" x:Key="TextBoxStyle" BasedOn="{StaticResource MainStyle}">
-    </Style> 
+    </Style>
 
-    <Style TargetType="{x:Type Button}" x:Key="MainUpButtonStyle" BasedOn="{StaticResource {x:Type Button}}">
-        <Setter Property="Background" Value="#2FAA87" />
-        <Setter Property="Foreground" Value="White" />
-        <Setter Property="IsTabStop" Value="False" />
-        <Setter Property="BorderBrush" Value="Coral" />
-        <Setter Property="BorderThickness" Value="2" />
-        <Setter Property="Padding" Value="15 5" />
-        <Setter Property="Cursor" Value="Hand" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+	<Style TargetType="{x:Type Button}" x:Key="MainUpButtonStyle" BasedOn="{StaticResource {x:Type Button}}">
+		<Setter Property="Background" Value="#2FAA87" />
+		<Setter Property="Foreground" Value="White" />
+		<Setter Property="IsTabStop" Value="False" />
+		<Setter Property="BorderBrush" Value="Coral" />
+		<Setter Property="BorderThickness" Value="2" />
+		<Setter Property="Padding" Value="15 5" />
+		<Setter Property="Cursor" Value="Hand" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Button}">
+					<Border BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             Padding="{TemplateBinding Padding}"
                             Background="{TemplateBinding Background}"
                             Cursor="{TemplateBinding Cursor}"
                             CornerRadius="5">
-                        <TextBlock Text="{TemplateBinding Content}"
+						<TextBlock Text="{TemplateBinding Content}"
                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                    FontFamily="{TemplateBinding FontFamily}"
                                    Foreground="{TemplateBinding Foreground}"
                                    Style="{StaticResource TextBlockStyle}" />
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Style.Triggers>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Background" Value="Gray" />
-                <Setter Property="Foreground" Value="#FFAE5F" />
-            </Trigger>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#3946AA" />
-            </Trigger>
-            <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="#171717" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Style.Triggers>
+			<Trigger Property="IsEnabled" Value="False">
+				<Setter Property="Background" Value="Gray" />
+				<Setter Property="Foreground" Value="#FFAE5F" />
+			</Trigger>
+			<Trigger Property="IsMouseOver" Value="True">
+				<Setter Property="Background" Value="#3946AA" />
+			</Trigger>
+			<Trigger Property="IsPressed" Value="True">
+				<Setter Property="Background" Value="#171717" />
+			</Trigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style TargetType="{x:Type Button}" x:Key="MainButtonStyle" BasedOn="{StaticResource {x:Type Button}}">
+		<Setter Property="Background" Value="#2FAA87" />
+		<Setter Property="Foreground" Value="White" />
+		<Setter Property="IsTabStop" Value="False" />
+		<Setter Property="BorderBrush" Value="Coral" />
+		<Setter Property="BorderThickness" Value="2" />
+		<Setter Property="Padding" Value="15 5" />
+		<Setter Property="Cursor" Value="Hand" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Button}">
+					<Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}"
+                            Cursor="{TemplateBinding Cursor}"
+                            CornerRadius="5">
+						<ContentPresenter Content="{TemplateBinding Content}"
+                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Style.Triggers>
+			<Trigger Property="IsEnabled" Value="False">
+				<Setter Property="Background" Value="Gray" />
+				<Setter Property="Foreground" Value="#FFAE5F" />
+			</Trigger>
+			<Trigger Property="IsMouseOver" Value="True">
+				<Setter Property="Background" Value="#3946AA" />
+			</Trigger>
+			<Trigger Property="IsPressed" Value="True">
+				<Setter Property="Background" Value="#171717" />
+			</Trigger>
+		</Style.Triggers>
+	</Style>
 </ResourceDictionary>
