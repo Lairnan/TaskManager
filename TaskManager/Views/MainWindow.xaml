@@ -14,7 +14,7 @@
         MinWidth="700"
         Width="700">
     
-    <controls:MenuBarPanel Template="{StaticResource MenuBarPanelTemplate}">
+    <controls:MenuBarPanel>
         <controls:MenuBarPanel.Header>
             <!-- Main menu panel -->
             <Menu Background="Transparent" Foreground="White">
