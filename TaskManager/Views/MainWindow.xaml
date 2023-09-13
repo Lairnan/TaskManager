@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Style="{StaticResource WindowStyle}"
         WindowStartupLocation="CenterScreen"
-        Title="Главное окно"
+        Title="{Binding Title}"
         Height="500"
         MinHeight="500"
         MinWidth="700"
@@ -45,11 +45,7 @@
 							   Margin="5 0"/>
 				</StackPanel>
 	            <StackPanel Grid.Row="1" HorizontalAlignment="Left">
-		            <Button Style="{StaticResource MainButtonStyle}"
-		                    Command="{Binding TestCommand}"
-		                    Padding="3"
-		                    FontSize="16"
-		                    Content="Test Button"/>
+		            <Frame Content="{Binding CurrentPage}"/>
 	            </StackPanel>
             </Grid>
         </controls:MenuBarPanel.Content>

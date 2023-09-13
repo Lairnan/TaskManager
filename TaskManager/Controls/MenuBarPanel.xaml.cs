@@ -12,7 +12,7 @@ namespace TaskManager.Controls
         public MenuBarPanel()
         {
             InitializeComponent();
-            Loaded += (s, e) =>
+            Loaded += (_, _) =>
             {
                 var window = Window.GetWindow(this);
                 if (window == null) return;
@@ -22,6 +22,8 @@ namespace TaskManager.Controls
                     ? Visibility.Visible
                     : Visibility.Collapsed;
                 SwitchStateBtn.Content = window.WindowState == WindowState.Maximized ? "2" : "1";
+
+                window.StateChanged += (_, _) => SwitchStateBtn.Content = window.WindowState == WindowState.Maximized ? "2" : "1";
             };
         }
         

@@ -5,12 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TaskManager.Models;
+using TaskManager.Services.Implementation;
+using TaskManager.Services.Interface;
+using TaskManager.ViewModels;
 
 namespace TaskManager;
-
-public interface ISingleton {}
-public interface ITransient {}
-public interface IScoped {}
 
 public static class IoC
 {
@@ -30,14 +29,14 @@ public static class IoC
         
         services.AddDbContext<TaskManageContext>(s 
             => s.UseSqlite(configuration.GetConnectionString("sqlite")));
-        
-        services.Scan(
-            s => s.FromAssemblyOf<ITransient>()
-                .AddClasses(x => x.AssignableTo<ITransient>()).AsSelf().WithTransientLifetime()
-                .AddClasses(x => x.AssignableTo<IScoped>()).AsSelf().WithScopedLifetime()
-                .AddClasses(x => x.AssignableTo<ISingleton>()).AsSelf().WithSingletonLifetime()
-            );
 
+        // Services
+        services.AddScoped<IPageService, PageService>();
+        services.AddSingleton<ISynchronizeService, SynchronizeService>();
+
+        // ViewModels
+        services.AddTransient<MainViewModel>();
+        
         Provider = services.BuildServiceProvider();
 
         foreach (var service in services.Where(s => s.Lifetime == ServiceLifetime.Singleton))

@@ -1,25 +1,25 @@
-﻿using System.Net;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using TaskManager.Models;
+using TaskManager.Services.Interface;
 
-namespace TaskManager.Services;
+namespace TaskManager.Services.Implementation;
 
-public class SynchronizeService : ITransient
+public class SynchronizeService : ISynchronizeService
 {
-    public static async Task SendObjectAsync<T>(T obj)
+    public async Task SendObjectAsync<T>(T obj)
         where T : IDbEntity
     {
     }
     
-    public static async Task<T?> ReceiveObjectAsync<T>(T obj)
+    public async Task<T?> ReceiveObjectAsync<T>(T obj)
         where T : IDbEntity
     {
         return default;
     }
 
-    public static async Task<IpInfo?> GetCurrentIpAsync()
+    public async Task<IpInfo?> GetCurrentIpAsync()
     {
         using var client = new HttpClient();
         var response = await client.GetAsync("https://ipinfo.io/json");
