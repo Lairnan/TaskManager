@@ -18,9 +18,15 @@
         <controls:MenuBarPanel.Header>
             <!-- Main menu panel -->
             <Menu Background="Transparent" Foreground="White">
-                <MenuItem Header="Создать"/>
-                <MenuItem Header="Просмотр"/>
-                <MenuItem Header="Синхронизация"/>
+	            <MenuItem Style="{StaticResource BurgerMenuItemStyle}">
+		            <MenuItem.Header>
+			            <Image Source="/Images/burger-menu.png" Width="32" Height="32"/>
+		            </MenuItem.Header>
+		            
+		            <MenuItem Header="Создать" Style="{StaticResource MenuItemStyle}"/>
+	                <MenuItem Header="Просмотр" Style="{StaticResource MenuItemStyle}"/>
+	                <MenuItem Header="Синхронизация" Style="{StaticResource MenuItemStyle}"/>
+	            </MenuItem>
             </Menu>
         </controls:MenuBarPanel.Header>
         <controls:MenuBarPanel.Content>
@@ -29,10 +35,18 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-				<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">
+				<StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">
+					<Button Content="&lt;-"
+					        Style="{StaticResource MainButtonStyle}"
+					        Padding="0"
+					        FontSize="18"
+					        Width="40"
+					        Margin="0 0 15 0"
+					        Command="{Binding GoToBackCommand}"/>
+					
 					<Button Style="{StaticResource MainButtonStyle}"
 					        Command="{Binding ShowSettingsCommand}"
-							Padding="3">
+					        Padding="3">
 						<Button.Content>
 							<Image Width="27"
 								   Height="27"
@@ -44,9 +58,10 @@
 							   VerticalAlignment="Center"
 							   Margin="5 0"/>
 				</StackPanel>
-	            <StackPanel Grid.Row="1" HorizontalAlignment="Left">
-		            <Frame Content="{Binding CurrentPage}"/>
-	            </StackPanel>
+		        <Frame Grid.Row="1"
+		               Content="{Binding CurrentPage}"
+		               NavigationUIVisibility="Hidden"
+		               IsTabStop="False"/>
             </Grid>
         </controls:MenuBarPanel.Content>
     </controls:MenuBarPanel>
