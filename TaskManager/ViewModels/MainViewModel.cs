@@ -15,7 +15,7 @@ namespace TaskManager.ViewModels;
 
 public class MainViewModel : BindableBase
 {
-    private readonly TaskManageContext _taskManageContext;
+    private readonly ITaskManageContext _taskManageContext;
     private readonly IPageService _pageService;
 
     private Page _currentPage = new();
@@ -24,7 +24,7 @@ public class MainViewModel : BindableBase
     private ICommand? _showSettingsCommand;
     private ICommand? _goToBackCommand;
 
-    public MainViewModel(TaskManageContext taskManageContext, IPageService pageService)
+    public MainViewModel(ITaskManageContext taskManageContext, IPageService pageService)
     {
         _taskManageContext = taskManageContext;
         _pageService = pageService;

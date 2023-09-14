@@ -8,6 +8,7 @@ using TaskManager.Models;
 using TaskManager.Services.Implementation;
 using TaskManager.Services.Interface;
 using TaskManager.ViewModels;
+using TaskManager.ViewModels.Pages;
 
 namespace TaskManager;
 
@@ -27,7 +28,7 @@ public static class IoC
         
         var services = new ServiceCollection();
         
-        services.AddDbContext<TaskManageContext>(s 
+        services.AddDbContext<ITaskManageContext, TaskManageContext>(s 
             => s.UseSqlite(configuration.GetConnectionString("sqlite")));
 
         // Services
@@ -36,6 +37,7 @@ public static class IoC
 
         // ViewModels
         services.AddTransient<MainViewModel>();
+        services.AddScoped<ViewTasksViewModel>();
         
         Provider = services.BuildServiceProvider();
 

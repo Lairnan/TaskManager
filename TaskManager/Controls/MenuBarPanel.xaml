@@ -6,76 +6,76 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Border Background="#333">
-        <Grid Margin="15">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            
-            <Grid Grid.Row="0" MouseEnter="PnlControlBar_OnMouseEnter" MouseLeftButtonDown="PnlControlBar_OnMouseLeftButtonDown" >
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0"
-                            Orientation="Horizontal"
-                            VerticalAlignment="Center">
-                    <Image Margin="5 0"
-                           Width="32"
-                           Source="/Images/logo.png"/>
-                    <TextBlock FontSize="16"
+            <Border Background="#333" Grid.Row="0" MouseEnter="PnlControlBar_OnMouseEnter" MouseLeftButtonDown="PnlControlBar_OnMouseLeftButtonDown">
+                <Grid Margin="15 15 15 5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center">
+                        <Image Margin="5 0"
+                               Width="32"
+                               Source="/Images/logo.png"/>
+                        <TextBlock FontSize="16"
+                                   Foreground="White"
+                                   Margin="0 5 5 0"
+                                   Text="Task Manager"/>
+                    </StackPanel>
+                    <ContentPresenter x:Name="HeaderPresenter" ContentSource="Header" Grid.Column="1" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="2"
+                               TextAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="18"
                                Foreground="White"
-                               Margin="0 5 5 0"
-                               Text="Task Manager"/>
-                </StackPanel>
-                <ContentPresenter x:Name="HeaderPresenter" ContentSource="Header" Grid.Column="1" VerticalAlignment="Center" />
-                <TextBlock Grid.Column="2"
-                           TextAlignment="Center"
-                           VerticalAlignment="Center"
-                           FontSize="18"
-                           Foreground="White"
-                           Margin="5,5"
-                           Text="{Binding Title, RelativeSource={RelativeSource AncestorType=Window}}">
-                    <TextBlock.ToolTip>
-                        <Binding RelativeSource="{RelativeSource Mode=Self}" Path="Text"/>
-                    </TextBlock.ToolTip>
-                </TextBlock>
-                <StackPanel Grid.Column="3"
-                            Orientation="Horizontal">
-                    <Button Margin="3 0"
-                            Padding="0"
-                            Width="40"
-                            Click="MinimizeBtn_Click" 
-                            Style="{StaticResource MainUpButtonStyle}"
-                            HorizontalContentAlignment="Center"
-                            VerticalContentAlignment="Center"
-                            Content="0"
-                            FontFamily="Webdings"/>
-                    <Button x:Name="SwitchStateBtn"
-                            Margin="3 0"
-                            Padding="0"
-                            Width="40"
-                            Click="SwitchStateBtn_Click"
-                            Style="{StaticResource MainUpButtonStyle}"
-                            HorizontalContentAlignment="Center"
-                            VerticalContentAlignment="Center"
-                            Content="{Binding }"
-                            FontFamily="Webdings"/>
-                    <Button Margin="3 0"
-                            Padding="0"
-                            Width="40"
-                            Click="CloseBtn_Click" 
-                            Style="{StaticResource MainUpButtonStyle}"
-                            HorizontalContentAlignment="Center"
-                            VerticalContentAlignment="Center"
-                            Content="r"
-                            FontFamily="Webdings"/>
-                </StackPanel>
-            </Grid>
-            <ContentPresenter x:Name="ContentPresenter" ContentSource="Content" Grid.Row="1" />
+                               Margin="5,5"
+                               Text="{Binding Title, RelativeSource={RelativeSource AncestorType=Window}}">
+                        <TextBlock.ToolTip>
+                            <Binding RelativeSource="{RelativeSource Mode=Self}" Path="Text"/>
+                        </TextBlock.ToolTip>
+                    </TextBlock>
+                    <StackPanel Grid.Column="3"
+                                Orientation="Horizontal">
+                        <Button Margin="3 0"
+                                Padding="0"
+                                Width="40"
+                                Click="MinimizeBtn_Click" 
+                                Style="{StaticResource MainUpButtonStyle}"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Content="0"
+                                FontFamily="Webdings"/>
+                        <Button x:Name="SwitchStateBtn"
+                                Margin="3 0"
+                                Padding="0"
+                                Width="40"
+                                Click="SwitchStateBtn_Click"
+                                Style="{StaticResource MainUpButtonStyle}"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Content="{Binding }"
+                                FontFamily="Webdings"/>
+                        <Button Margin="3 0"
+                                Padding="0"
+                                Width="40"
+                                Click="CloseBtn_Click" 
+                                Style="{StaticResource MainUpButtonStyle}"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Content="r"
+                                FontFamily="Webdings"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <ContentPresenter Margin="15 0 15 15" x:Name="ContentPresenter" ContentSource="Content" Grid.Row="1" />
         </Grid>
     </Border>
 </UserControl>
