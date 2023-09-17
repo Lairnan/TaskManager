@@ -11,13 +11,13 @@ namespace TaskManager.ViewModels.Pages;
 
 public class ViewTasksViewModel : BindableBase
 {
-    private readonly ITaskManageContext _taskManageContext;
+    private readonly TaskManageDbContext _taskManageContext;
     private readonly IPageService _pageService;
 
     private string _filterText = string.Empty;
     private ObservableCollection<Task> _tasksCollection = null!;
     
-    public ViewTasksViewModel(ITaskManageContext taskManageContext, IPageService pageService)
+    public ViewTasksViewModel(TaskManageDbContext taskManageContext, IPageService pageService)
     {
         _taskManageContext = taskManageContext;
         _pageService = pageService;

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Prism.Commands;
 using Prism.Mvvm;
 using TaskManager.Models;
-using TaskManager.Services;
 using TaskManager.Services.Interface;
 using TaskManager.Views.Pages;
 
@@ -15,7 +12,7 @@ namespace TaskManager.ViewModels;
 
 public class MainViewModel : BindableBase
 {
-    private readonly ITaskManageContext _taskManageContext;
+    private readonly TaskManageDbContext _taskManageContext;
     private readonly IPageService _pageService;
 
     private Page _currentPage = new();
@@ -24,7 +21,7 @@ public class MainViewModel : BindableBase
     private ICommand? _showSettingsCommand;
     private ICommand? _goToBackCommand;
 
-    public MainViewModel(ITaskManageContext taskManageContext, IPageService pageService)
+    public MainViewModel(TaskManageDbContext taskManageContext, IPageService pageService)
     {
         _taskManageContext = taskManageContext;
         _pageService = pageService;

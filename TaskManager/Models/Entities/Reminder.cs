@@ -1,22 +1,39 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Prism.Mvvm;
 
 namespace TaskManager.Models.Entities;
 
-public class Reminder : IDbEntity
+public class Reminder : BindableBase, IDbEntity
 {
+    private Guid _id;
+    private DateTime _dueDate;
+    private DateTime _createdAt;
+    
     public Reminder() { Id = new Guid(); }
-    
+
     [Key]
-    public Guid Id { get; set; }
-    
+    public Guid Id
+    {
+        get => _id;
+        set => SetProperty(ref _id, value);
+    }
+
     [Required]
-    public DateTime DueDate { get; set; }
-    
+    public DateTime DueDate
+    {
+        get => _dueDate;
+        set => SetProperty(ref _dueDate, value);
+    }
+
     [Required]
-    public DateTime CreatedAt { get; set; }
-    
+    public DateTime CreatedAt
+    {
+        get => _createdAt;
+        set => SetProperty(ref _createdAt, value);
+    }
+
     [Required]
     [ForeignKey("Task")]
     public Guid TaskId { get; set; }

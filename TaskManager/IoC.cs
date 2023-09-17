@@ -28,7 +28,7 @@ public static class IoC
         
         var services = new ServiceCollection();
         
-        services.AddDbContext<ITaskManageContext, TaskManageContext>(s 
+        services.AddDbContext<TaskManageDbContext, TaskManageContext>(s 
             => s.UseSqlite(configuration.GetConnectionString("sqlite")));
 
         // Services

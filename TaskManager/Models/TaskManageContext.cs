@@ -8,7 +8,7 @@ namespace TaskManager.Models;
 
 public interface IDbEntity { }
 
-public class TaskManageContext : DbContext, ITaskManageContext
+public class TaskManageContext : TaskManageDbContext
 {
     public TaskManageContext(DbContextOptions<TaskManageContext> options) : base(options)
     {
@@ -27,7 +27,13 @@ public class TaskManageContext : DbContext, ITaskManageContext
             Priority = 1,
             Completed = false,
             Recurring = false,
-            RecurringInterval = 0,
+            Interval = RecurringInterval.Weekly,
+            WeeklyRecurrenceDays = new System.Collections.Generic.HashSet<DayOfWeek>
+            {
+				DayOfWeek.Monday,
+				DayOfWeek.Wednesday,
+				DayOfWeek.Tuesday
+			},
             CreatedAt = DateTime.Now
         };
 
@@ -62,8 +68,4 @@ public class TaskManageContext : DbContext, ITaskManageContext
             .HasConversion(new DateTimeToTicksConverter())
             .HasDefaultValue(DateTime.Now);
     }
-
-    public DbSet<Task> Tasks { get; set; }
-    public DbSet<Tag> Tags { get; set; }
-    public DbSet<Reminder> Reminders { get; set; }
 }
