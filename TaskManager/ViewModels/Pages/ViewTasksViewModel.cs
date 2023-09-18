@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
 using Microsoft.EntityFrameworkCore;
+using Prism.Commands;
 using Prism.Mvvm;
 using TaskManager.Models;
 using TaskManager.Models.Entities;
@@ -16,7 +18,10 @@ public class ViewTasksViewModel : BindableBase
 
     private string _filterText = string.Empty;
     private ObservableCollection<Task> _tasksCollection = null!;
-    
+    private Task? _lastSelectedTask;
+    private Task? _selectedTask;
+    private DelegateCommand? _mouseLeftButtonCommand;
+
     public ViewTasksViewModel(TaskManageDbContext taskManageContext, IPageService pageService)
     {
         _taskManageContext = taskManageContext;
@@ -46,4 +51,20 @@ public class ViewTasksViewModel : BindableBase
                 .ToListAsync());
         else TasksCollection = new ObservableCollection<Task>();
     }
+
+    public Task? SelectedTask
+    {
+        get => _selectedTask;
+        set => SetProperty(ref _selectedTask, value);
+    }
+
+    public ICommand MouseLeftButtonCommand => _mouseLeftButtonCommand ??= new DelegateCommand(() =>
+    {
+        if (_selectedTask != null && _selectedTask.Equals(_lastSelectedTask))
+        {
+            SelectedTask = null;
+            _lastSelectedTask = null;
+        }
+        else _lastSelectedTask = _selectedTask;
+    });
 }
