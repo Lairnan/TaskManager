@@ -18,6 +18,11 @@
 		</Grid.RowDefinitions>
 
 		<Grid Grid.Row="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			
 		</Grid>
 
 		<Grid Grid.Row="1">
@@ -79,83 +84,75 @@
 				</StackPanel>
 			</StackPanel>
 			
-			<ListBox Grid.Column="0"
-			         Background="Transparent"
-			         BorderThickness="0"
-			         BorderBrush="{x:Null}"
-			         SelectedItem="{Binding SelectedTask, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-			         ItemsSource="{Binding TasksCollection}">
+			<ItemsControl Grid.Column="0"
+			              Background="Transparent"
+			              BorderThickness="0"
+			              BorderBrush="{x:Null}"
+			              ItemsSource="{Binding TasksCollection}">
 				
-				<ListBox.ItemTemplate>
+				<ItemsControl.ItemTemplate>
 					<DataTemplate>
-						<Grid Margin="5"
-						      Background="#FF252222"
-						      Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor,
-																			AncestorType=ListBox},
-																			Path=ActualWidth,
-																			Converter={StaticResource WidthConverter}}">
-							
-							<i:Interaction.Triggers>
-								<i:EventTrigger EventName="MouseLeftButtonUp">
-									<i:InvokeCommandAction Command="{Binding DataContext.MouseLeftButtonCommand,
-																		RelativeSource={RelativeSource AncestorType=Page}}"
-									                       CommandParameter="{Binding}"/>
-								</i:EventTrigger>
-							</i:Interaction.Triggers>
-							
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto" />
-								<ColumnDefinition Width="*" />
-							</Grid.ColumnDefinitions>
-							<CheckBox Grid.Column="0" IsChecked="{Binding Completed, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5" />
-							<Grid Grid.Column="1" Margin="0 0 0 10">
+						<Button Margin="5"
+						        Background="#FF252222"
+						        Style="{StaticResource ClearBtnStyle}"
+						        Command="{Binding DataContext.MouseLeftButtonUpCommand,
+															RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}"
+						        CommandParameter="{Binding}">
+							<Grid>
 								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="Auto"/>
-									<ColumnDefinition/>
-									<ColumnDefinition Width="200"/>
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition />
 								</Grid.ColumnDefinitions>
-								<Grid>
-									<Grid.RowDefinitions>
-										<RowDefinition Height="Auto"/>
-										<RowDefinition Height="Auto"/>
-									</Grid.RowDefinitions>
-									<StackPanel>
-										<TextBlock Text="{Binding Name}" FontWeight="Bold" Style="{StaticResource TextBlockStyle}" />
-										<TextBlock Text="{Binding Description}" Style="{StaticResource TextBlockStyle}" MaxWidth="250" />
+								<CheckBox Grid.Column="0" IsChecked="{Binding Completed, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5" />
+								<Grid Grid.Column="1" Margin="0 0 0 10">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"/>
+										<ColumnDefinition/>
+										<ColumnDefinition Width="200"/>
+									</Grid.ColumnDefinitions>
+									<Grid>
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition Height="Auto"/>
+										</Grid.RowDefinitions>
+										<StackPanel>
+											<TextBlock Text="{Binding Name}" FontWeight="Bold" Style="{StaticResource TextBlockStyle}" />
+											<TextBlock Text="{Binding Description}" Style="{StaticResource TextBlockStyle}" MaxWidth="250" />
+										</StackPanel>
+										<ItemsControl Grid.Column="0"
+													  Grid.Row="1"
+													  ItemsSource="{Binding Tags}">
+											<ItemsControl.ItemsPanel>
+												<ItemsPanelTemplate>
+													<WrapPanel />
+												</ItemsPanelTemplate>
+											</ItemsControl.ItemsPanel>
+											<ItemsControl.ItemTemplate>
+												<DataTemplate>
+													<Border Background="DimGray" CornerRadius="5" Padding="5 2" Margin="5 3">
+														<TextBlock Text="{Binding Name}" FontSize="13" Style="{StaticResource TextBlockStyle}" />
+													</Border>
+												</DataTemplate>
+											</ItemsControl.ItemTemplate>
+										</ItemsControl>
+									</Grid>
+									<StackPanel Grid.Column="2" Grid.Row="0">
+										<TextBlock Text="{Binding DueDate, StringFormat='{}Время напоминания: {0:dd.MM.yy, HH:mm}', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}"
+												   Style="{StaticResource TextBlockStyle}"
+												   TextWrapping="Wrap"/>
+										<TextBlock Text="{Binding Interval, Converter={StaticResource EnumToLocalizedNameConverter}}" Style="{StaticResource TextBlockStyle}"/>
+										<CheckBox IsChecked="{Binding Recurring, UpdateSourceTrigger=PropertyChanged}">
+											<CheckBox.Content>
+												<TextBlock Text="напоминание" Style="{StaticResource TextBlockStyle}" FontSize="14"/>
+											</CheckBox.Content>
+										</CheckBox>
 									</StackPanel>
-									<ItemsControl Grid.Column="0"
-												  Grid.Row="1"
-												  ItemsSource="{Binding Tags}">
-										<ItemsControl.ItemsPanel>
-											<ItemsPanelTemplate>
-												<WrapPanel />
-											</ItemsPanelTemplate>
-										</ItemsControl.ItemsPanel>
-										<ItemsControl.ItemTemplate>
-											<DataTemplate>
-												<Border Background="DimGray" CornerRadius="5" Padding="5 2" Margin="5 3">
-													<TextBlock Text="{Binding Name}" FontSize="13" Style="{StaticResource TextBlockStyle}" />
-												</Border>
-											</DataTemplate>
-										</ItemsControl.ItemTemplate>
-									</ItemsControl>
 								</Grid>
-								<StackPanel Grid.Column="2" Grid.Row="0">
-									<TextBlock Text="{Binding DueDate, StringFormat='{}Время напоминания: {0:dd.MM.yy, HH:mm}', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}"
-											   Style="{StaticResource TextBlockStyle}"
-											   TextWrapping="Wrap"/>
-									<TextBlock Text="{Binding Interval, Converter={StaticResource EnumToLocalizedNameConverter}}" Style="{StaticResource TextBlockStyle}"/>
-									<CheckBox IsChecked="{Binding Recurring, UpdateSourceTrigger=PropertyChanged}">
-										<CheckBox.Content>
-											<TextBlock Text="напоминание" Style="{StaticResource TextBlockStyle}" FontSize="14"/>
-										</CheckBox.Content>
-									</CheckBox>
-								</StackPanel>
 							</Grid>
-						</Grid>
+						</Button>
 					</DataTemplate>
-				</ListBox.ItemTemplate>
-			</ListBox>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
 		</Grid>
 	</Grid>
 </Page>

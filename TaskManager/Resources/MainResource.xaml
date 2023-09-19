@@ -62,6 +62,120 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+	
+	<Style x:Key="DatePickerTextBoxStyle" TargetType="{x:Type DatePickerTextBox}" BasedOn="{StaticResource TextBoxStyle}">
+		<Setter Property="CaretBrush" Value="White"/>
+		<Setter Property="BorderBrush" Value="White"/>
+		<Setter Property="Margin" Value="0 4"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type DatePickerTextBox}">
+					<Border CornerRadius="5"
+					        BorderBrush="White"
+					        Background="{TemplateBinding Background}"
+					        BorderThickness="0 0 0 1">
+						<ScrollViewer x:Name="PART_ContentHost"/>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter TargetName="PART_ContentHost" Property="Opacity" Value="0.7"/>
+						</Trigger>
+						<Trigger Property="Width" Value="Auto">
+							<Setter Property="MinWidth" Value="100"/>
+						</Trigger>
+						<Trigger Property="Height" Value="Auto">
+							<Setter Property="MinHeight" Value="20"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<Style TargetType="{x:Type Button}" x:Key="ClearBtnStyle">
+		<Setter Property="Cursor" Value="Hand" />
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Button}">
+					<Grid Background="{TemplateBinding Background}">
+						<ContentPresenter />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<Style x:Key="DatePickerStyle" TargetType="{x:Type DatePicker}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DatePicker}">
+                    <Grid x:Name="PART_Root">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <DatePickerTextBox x:Name="PART_TextBox"
+                                           BorderBrush="{TemplateBinding BorderBrush}"
+                                           Style="{StaticResource DatePickerTextBoxStyle}"/>
+                        <Button Background="Transparent"
+                                Grid.Column="1"
+                                Style="{StaticResource ClearBtnStyle}"
+                                x:Name="PART_Button">
+                            <Path Height="30"
+                                  HorizontalAlignment="Center"
+                                  Margin="4,3,4,3"
+                                  Stretch="Fill"
+                                  Stroke="#455378"
+                                  Fill="Transparent"
+                                  StrokeThickness="2"
+                                  VerticalAlignment="Center"
+                                  Width="20"
+                                  Data="M5,5 h50 c0,0 40,30 80,0 c0,0 -40,-30 -80,0
+                                    m80,0 h75 c0,0 40,30 80,0 c0,0 -40,-30 -80,0
+                                    m80,0 h75 c0,0 40,30 80,0 c0,0 -40,-30 -80,0
+                                    m80,0 h75 c0,0 40,30 80,0 c0,0 -40,-30 -80,0
+                                    m80,0 h50 v50 H5 V5 h1
+                                    M5,55 v130 h645 V55 z
+                                    M5,195 h640 c0,0 2,5 0,1 h-640 c0,0 -2,-5 0,-1
+                                    M5,205 h640 c0,0 2,5 0,1 h-640 c0,0 -2,-5 0,-1
+                                    M40,70 h50 c0,0 5,5 0,5 h-50 c0,0 -5,-5 0,-5
+                                    M160,70 h50 c0,0 5,5 0,5 h-50 c0,0 -5,-5 0,-5
+                                    M280,70 h50 c0,0 5,5 0,5 h-50 c0,0 -5,-5 0,-5
+                                    M420,70 h50 c0,0 5,5 0,5 h-50 c0,0 -5,-5 0,-5
+                                    M560,70 h50 c0,0 5,5 0,5 h-50 c0,0 -5,-5 0,-5
+                                    M40,100 h50 c0,0 5,5 0,5 h-50 c0,0 -5,-5 0,-5
+                                    M160,100 h50 c0,0 5,5 0,5 h-50 c0,0 -5,-5 0,-5
+                                    M280,100 h50 c0,0 5,5 0,5 h-50 c0,0 -5,-5 0,-5
+                                    M420,100 h50 c0,0 5,5 0,5 h-50 c0,0 -5,-5 0,-5
+                                    M560,100 h50 c0,0 5,5 0,5 h-50 c0,0 -5,-5 0,-5
+                                    M40,130 h50 c0,0 5,5 0,5 h-50 c0,0 -5,-5 0,-5
+                                    M160,130 h50 c0,0 5,5 0,5 h-50 c0,0 -5,-5 0,-5
+                                    M280,130 h50 c0,0 5,5 0,5 h-50 c0,0 -5,-5 0,-5
+                                    M420,130 h50 c0,0 5,5 0,5 h-50 c0,0 -5,-5 0,-5
+                                    M560,130 h50 c0,0 5,5 0,5 h-50 c0,0 -5,-5 0,-5
+                                    M40,160 h50 c0,0 5,5 0,5 h-50 c0,0 -5,-5 0,-5
+                                    M160,160 h50 c0,0 5,5 0,5 h-50 c0,0 -5,-5 0,-5
+                                    M280,160 h50 c0,0 5,5 0,5 h-50 c0,0 -5,-5 0,-5
+                                    M420,160 h50 c0,0 5,5 0,5 h-50 c0,0 -5,-5 0,-5
+                                    M560,160 h50 c0,0 5,5 0,5 h-50 c0,0 -5,-5 0,-5"/>
+                        </Button>
+                        <Grid x:Name="PART_DisabledVisual"
+                              Grid.Column="0"
+                              Grid.ColumnSpan="2"
+                              IsHitTestVisible="False"
+                              Opacity="0">
+                            <Popup x:Name="PART_Popup"
+                                   AllowsTransparency="True"
+                                   Placement="Bottom"
+                                   PlacementTarget="{Binding ElementName=PART_TextBox}"
+                                   StaysOpen="False"/>
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 	<Style TargetType="{x:Type Button}" x:Key="MainUpButtonStyle" BasedOn="{StaticResource {x:Type Button}}">
 		<Setter Property="Background" Value="#2FAA87" />

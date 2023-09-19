@@ -8,7 +8,6 @@
         <ResourceDictionary>
             <local:ViewModelLocator x:Key="VmLocator"/>
             <converter:EnumToLocalizedNameConverter x:Key="EnumToLocalizedNameConverter" />
-            <converter:ActualWidthConverter x:Key="WidthConverter" />
             
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/MainResource.xaml"/>

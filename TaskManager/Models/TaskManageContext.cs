@@ -45,6 +45,24 @@ public class TaskManageContext : TaskManageDbContext
         
         Tasks.Add(task);
 
+        var newTask = new Task
+        {
+            Name = "Test2",
+            Description = "TEst2",
+            DueDate = DateTime.Parse("17.09.2023"),
+            Priority = 1,
+            Completed = false,
+            Recurring = true,
+            Interval = RecurringInterval.Monthly,
+            WeeklyRecurrenceDays = new System.Collections.Generic.HashSet<DayOfWeek>
+            {
+                DayOfWeek.Monday
+            },
+            CreatedAt = DateTime.Now
+        };
+        
+        Tasks.Add(newTask);
+
         SaveChanges();
     }
 
