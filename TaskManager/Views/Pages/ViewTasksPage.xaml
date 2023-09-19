@@ -3,156 +3,165 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-	  xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
-	  xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-	  xmlns:controls="clr-namespace:TaskManager.Controls"
-	  DataContext="{Binding ViewTasksViewModel, Source={StaticResource VmLocator}}"
+      xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
+      DataContext="{Binding ViewTasksViewModel, Source={StaticResource VmLocator}}"
       mc:Ignorable="d"
       d:DesignHeight="450"
-	  d:DesignWidth="800"
+      d:DesignWidth="800"
       Title="Список задач">
     <Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition/>
-		</Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
 
-		<Grid Grid.Row="0">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition/>
-				<ColumnDefinition/>
-			</Grid.ColumnDefinitions>
-			
-		</Grid>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
 
-		<Grid Grid.Row="1">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition/>
-				<ColumnDefinition Width="Auto"/>
-			</Grid.ColumnDefinitions>
+        </Grid>
 
-			<StackPanel Grid.Column="1" Width="225" Margin="15 0 0 0">
-				<StackPanel.Style>
-					<Style TargetType="StackPanel">
-						<Setter Property="Visibility" Value="Visible"/>
-						<Style.Triggers>
-							<DataTrigger Binding="{Binding Path=SelectedTask}" Value="{x:Null}">
-								<Setter Property="Visibility" Value="Collapsed"/>
-							</DataTrigger>
-						</Style.Triggers>
-					</Style>
-				</StackPanel.Style>
-				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-					<TextBlock Text="Название: "
-							   Width="80"
-							   TextWrapping="Wrap"
-							   Margin="0 7 0 0"
-							   Style="{StaticResource TextBlockStyle}"/>
-					<TextBox Text="{Binding SelectedTask.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-							 Width="110"
-							 Style="{StaticResource TextBoxStyle}"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-					<TextBlock Text="Название: "
-							   Width="80"
-							   TextWrapping="Wrap"
-							   Margin="0 7 0 0"
-							   Style="{StaticResource TextBlockStyle}"/>
-					<TextBox Text="{Binding SelectedTask.Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-							 Width="110"
-							 Style="{StaticResource TextBoxStyle}"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-					<TextBlock Text="Название: "
-							   Width="80"
-							   TextWrapping="Wrap"
-							   Margin="0 7 0 0"
-							   Style="{StaticResource TextBlockStyle}"/>
-					<TextBox Text="{Binding SelectedTask.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-							 Width="110"
-							 Style="{StaticResource TextBoxStyle}"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-					<TextBlock Text="Название: "
-							   Width="80"
-							   TextWrapping="Wrap"
-							   Margin="0 7 0 0"
-							   Style="{StaticResource TextBlockStyle}"/>
-					<TextBox Text="{Binding SelectedTask.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-							 Width="110"
-							 Style="{StaticResource TextBoxStyle}"/>
-				</StackPanel>
-			</StackPanel>
-			
-			<ItemsControl Grid.Column="0"
-			              Background="Transparent"
-			              BorderThickness="0"
-			              BorderBrush="{x:Null}"
-			              ItemsSource="{Binding TasksCollection}">
-				
-				<ItemsControl.ItemTemplate>
-					<DataTemplate>
-						<Button Margin="5"
-						        Background="#FF252222"
-						        Style="{StaticResource ClearBtnStyle}"
-						        Command="{Binding DataContext.MouseLeftButtonUpCommand,
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="1" Width="225" Margin="15 0 0 0">
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Visibility" Value="Visible" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=SelectedTask}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Название: "
+                               Width="80"
+                               TextWrapping="Wrap"
+                               Margin="0 7 0 0"
+                               Style="{StaticResource TextBlockStyle}" />
+                    <TextBox Text="{Binding SelectedTask.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                             Width="110"
+                             Style="{StaticResource TextBoxStyle}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Название: "
+                               Width="80"
+                               TextWrapping="Wrap"
+                               Margin="0 7 0 0"
+                               Style="{StaticResource TextBlockStyle}" />
+                    <TextBox
+                        Text="{Binding SelectedTask.Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Width="110"
+                        Style="{StaticResource TextBoxStyle}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Название: "
+                               Width="80"
+                               TextWrapping="Wrap"
+                               Margin="0 7 0 0"
+                               Style="{StaticResource TextBlockStyle}" />
+                    <TextBox Text="{Binding SelectedTask.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                             Width="110"
+                             Style="{StaticResource TextBoxStyle}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Название: "
+                               Width="80"
+                               TextWrapping="Wrap"
+                               Margin="0 7 0 0"
+                               Style="{StaticResource TextBlockStyle}" />
+                    <TextBox Text="{Binding SelectedTask.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                             Width="110"
+                             Style="{StaticResource TextBoxStyle}" />
+                </StackPanel>
+            </StackPanel>
+
+            <ItemsControl Grid.Column="0"
+                          Background="Transparent"
+                          BorderThickness="0"
+                          BorderBrush="{x:Null}"
+                          ItemsSource="{Binding TasksCollection}">
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Margin="5"
+                                Background="#FF252222"
+                                Style="{StaticResource ClearBtnStyle}"
+                                Command="{Binding DataContext.MouseLeftButtonUpCommand,
 															RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}"
-						        CommandParameter="{Binding}">
-							<Grid>
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="Auto" />
-									<ColumnDefinition />
-								</Grid.ColumnDefinitions>
-								<CheckBox Grid.Column="0" IsChecked="{Binding Completed, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5" />
-								<Grid Grid.Column="1" Margin="0 0 0 10">
-									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="Auto"/>
-										<ColumnDefinition/>
-										<ColumnDefinition Width="200"/>
-									</Grid.ColumnDefinitions>
-									<Grid>
-										<Grid.RowDefinitions>
-											<RowDefinition Height="Auto"/>
-											<RowDefinition Height="Auto"/>
-										</Grid.RowDefinitions>
-										<StackPanel>
-											<TextBlock Text="{Binding Name}" FontWeight="Bold" Style="{StaticResource TextBlockStyle}" />
-											<TextBlock Text="{Binding Description}" Style="{StaticResource TextBlockStyle}" MaxWidth="250" />
-										</StackPanel>
-										<ItemsControl Grid.Column="0"
-													  Grid.Row="1"
-													  ItemsSource="{Binding Tags}">
-											<ItemsControl.ItemsPanel>
-												<ItemsPanelTemplate>
-													<WrapPanel />
-												</ItemsPanelTemplate>
-											</ItemsControl.ItemsPanel>
-											<ItemsControl.ItemTemplate>
-												<DataTemplate>
-													<Border Background="DimGray" CornerRadius="5" Padding="5 2" Margin="5 3">
-														<TextBlock Text="{Binding Name}" FontSize="13" Style="{StaticResource TextBlockStyle}" />
-													</Border>
-												</DataTemplate>
-											</ItemsControl.ItemTemplate>
-										</ItemsControl>
-									</Grid>
-									<StackPanel Grid.Column="2" Grid.Row="0">
-										<TextBlock Text="{Binding DueDate, StringFormat='{}Время напоминания: {0:dd.MM.yy, HH:mm}', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}"
-												   Style="{StaticResource TextBlockStyle}"
-												   TextWrapping="Wrap"/>
-										<TextBlock Text="{Binding Interval, Converter={StaticResource EnumToLocalizedNameConverter}}" Style="{StaticResource TextBlockStyle}"/>
-										<CheckBox IsChecked="{Binding Recurring, UpdateSourceTrigger=PropertyChanged}">
-											<CheckBox.Content>
-												<TextBlock Text="напоминание" Style="{StaticResource TextBlockStyle}" FontSize="14"/>
-											</CheckBox.Content>
-										</CheckBox>
-									</StackPanel>
-								</Grid>
-							</Grid>
-						</Button>
-					</DataTemplate>
-				</ItemsControl.ItemTemplate>
-			</ItemsControl>
-		</Grid>
-	</Grid>
+                                CommandParameter="{Binding}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Grid.Column="0"
+                                          IsChecked="{Binding Completed, UpdateSourceTrigger=PropertyChanged}"
+                                          VerticalAlignment="Center" Margin="5" />
+                                <Grid Grid.Column="1" Margin="0 0 0 10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="200" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Name}" FontWeight="Bold"
+                                                       Style="{StaticResource TextBlockStyle}" />
+                                            <TextBlock Text="{Binding Description}"
+                                                       Style="{StaticResource TextBlockStyle}" MaxWidth="250" />
+                                        </StackPanel>
+                                        <ItemsControl Grid.Column="0"
+                                                      Grid.Row="1"
+                                                      ItemsSource="{Binding Tags}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border Background="DimGray" CornerRadius="5" Padding="5 2"
+                                                            Margin="5 3">
+                                                        <TextBlock Text="{Binding Name}" FontSize="13"
+                                                                   Style="{StaticResource TextBlockStyle}" />
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </Grid>
+                                    <StackPanel Grid.Column="2" Grid.Row="0">
+                                        <TextBlock
+                                            Text="{Binding DueDate, StringFormat='{}Время напоминания: {0:dd.MM.yy, HH:mm}', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}"
+                                            Style="{StaticResource TextBlockStyle}"
+                                            TextWrapping="Wrap" />
+                                        <TextBlock
+                                            Text="{Binding Interval, Converter={StaticResource EnumToLocalizedNameConverter}}"
+                                            Style="{StaticResource TextBlockStyle}" />
+                                        <CheckBox IsChecked="{Binding Recurring, UpdateSourceTrigger=PropertyChanged}">
+                                            <CheckBox.Content>
+                                                <TextBlock Text="напоминание" Style="{StaticResource TextBlockStyle}"
+                                                           FontSize="14" />
+                                            </CheckBox.Content>
+                                        </CheckBox>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+    </Grid>
 </Page>

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Prism.Mvvm;
@@ -26,6 +25,5 @@ public class Tag : BindableBase, IDbEntity
         set => SetProperty(ref _name, value);
     }
 
-    [InverseProperty("Tags")]
-    public List<Task> Tasks { get; set; } = new();
+    [InverseProperty("Tags")] public List<Task> Tasks { get; set; } = new();
 }

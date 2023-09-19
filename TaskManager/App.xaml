@@ -6,12 +6,12 @@
              StartupUri="/Views/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
-            <local:ViewModelLocator x:Key="VmLocator"/>
+            <local:ViewModelLocator x:Key="VmLocator" />
             <converter:EnumToLocalizedNameConverter x:Key="EnumToLocalizedNameConverter" />
-            
+
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/MainResource.xaml"/>
-                <ResourceDictionary Source="/Resources/MenuItemResource.xaml"/>
+                <ResourceDictionary Source="/Resources/MainResource.xaml" />
+                <ResourceDictionary Source="/Resources/MenuItemResource.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

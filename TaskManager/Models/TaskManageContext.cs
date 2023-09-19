@@ -1,12 +1,14 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TaskManager.Models.Entities;
 
 namespace TaskManager.Models;
 
-public interface IDbEntity { }
+public interface IDbEntity
+{
+}
 
 public class TaskManageContext : TaskManageDbContext
 {
@@ -14,7 +16,7 @@ public class TaskManageContext : TaskManageDbContext
     {
         // Database.EnsureDeleted();
         if (!Database.EnsureCreated()) return;
-        
+
         var tag = new Tag { Name = "New Tag" };
         var tag2 = new Tag { Name = "New Tag 2" };
         var tag3 = new Tag { Name = "New Tag 3" };
@@ -28,21 +30,21 @@ public class TaskManageContext : TaskManageDbContext
             Completed = false,
             Recurring = false,
             Interval = RecurringInterval.Weekly,
-            WeeklyRecurrenceDays = new System.Collections.Generic.HashSet<DayOfWeek>
+            WeeklyRecurrenceDays = new HashSet<DayOfWeek>
             {
-				DayOfWeek.Monday,
-				DayOfWeek.Wednesday,
-				DayOfWeek.Tuesday
-			},
+                DayOfWeek.Monday,
+                DayOfWeek.Wednesday,
+                DayOfWeek.Tuesday
+            },
             CreatedAt = DateTime.Now
         };
 
         Tags.Add(tag);
-        
+
         task.Tags.Add(tag);
         task.Tags.Add(tag2);
         task.Tags.Add(tag3);
-        
+
         Tasks.Add(task);
 
         var newTask = new Task
@@ -54,13 +56,13 @@ public class TaskManageContext : TaskManageDbContext
             Completed = false,
             Recurring = true,
             Interval = RecurringInterval.Monthly,
-            WeeklyRecurrenceDays = new System.Collections.Generic.HashSet<DayOfWeek>
+            WeeklyRecurrenceDays = new HashSet<DayOfWeek>
             {
                 DayOfWeek.Monday
             },
             CreatedAt = DateTime.Now
         };
-        
+
         Tasks.Add(newTask);
 
         SaveChanges();
@@ -68,21 +70,17 @@ public class TaskManageContext : TaskManageDbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Task>().
-            Property(p => p.DueDate)
+        modelBuilder.Entity<Task>().Property(p => p.DueDate)
             .HasConversion(new DateTimeToTicksConverter());
-        
-        modelBuilder.Entity<Task>().
-            Property(p => p.CreatedAt)
+
+        modelBuilder.Entity<Task>().Property(p => p.CreatedAt)
             .HasConversion(new DateTimeToTicksConverter())
             .HasDefaultValue(DateTime.Now);
-        
-        modelBuilder.Entity<Reminder>().
-            Property(p => p.DueDate)
+
+        modelBuilder.Entity<Reminder>().Property(p => p.DueDate)
             .HasConversion(new DateTimeToTicksConverter());
-        
-        modelBuilder.Entity<Reminder>().
-            Property(p => p.CreatedAt)
+
+        modelBuilder.Entity<Reminder>().Property(p => p.CreatedAt)
             .HasConversion(new DateTimeToTicksConverter())
             .HasDefaultValue(DateTime.Now);
     }

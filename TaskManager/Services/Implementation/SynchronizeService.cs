@@ -12,7 +12,7 @@ public class SynchronizeService : ISynchronizeService
         where T : IDbEntity
     {
     }
-    
+
     public async Task<T?> ReceiveObjectAsync<T>(T obj)
         where T : IDbEntity
     {
@@ -25,12 +25,8 @@ public class SynchronizeService : ISynchronizeService
         var response = await client.GetAsync("https://ipinfo.io/json");
 
         if (!response.IsSuccessStatusCode) return default;
-        
+
         var jsonContent = await response.Content.ReadAsStringAsync();
         return JsonConvert.DeserializeObject<IpInfo>(jsonContent);
-
-
     }
-    
-    
 }

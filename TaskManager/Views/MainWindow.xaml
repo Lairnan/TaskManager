@@ -13,57 +13,57 @@
         MinHeight="500"
         MinWidth="700"
         Width="700">
-    
+
     <controls:MenuBarPanel>
         <controls:MenuBarPanel.Header>
             <!-- Main menu panel -->
             <Menu Background="Transparent" Foreground="White">
-	            <MenuItem Style="{StaticResource BurgerMenuItemStyle}">
-		            <MenuItem.Header>
-			            <Image Source="/Images/burger-menu.png" Width="32" Height="32"/>
-		            </MenuItem.Header>
-		            
-		            <MenuItem Header="Создать" Style="{StaticResource MenuItemStyle}"/>
-	                <MenuItem Header="Просмотр" Style="{StaticResource MenuItemStyle}"/>
-	                <MenuItem Header="Синхронизация" Style="{StaticResource MenuItemStyle}"/>
-	            </MenuItem>
+                <MenuItem Style="{StaticResource BurgerMenuItemStyle}">
+                    <MenuItem.Header>
+                        <Image Source="/Images/burger-menu.png" Width="32" Height="32" />
+                    </MenuItem.Header>
+
+                    <MenuItem Header="Создать" Style="{StaticResource MenuItemStyle}" />
+                    <MenuItem Header="Просмотр" Style="{StaticResource MenuItemStyle}" />
+                    <MenuItem Header="Синхронизация" Style="{StaticResource MenuItemStyle}" />
+                </MenuItem>
             </Menu>
         </controls:MenuBarPanel.Header>
         <controls:MenuBarPanel.Content>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
-				<StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">
-					<Button Content="&lt;-"
-					        Style="{StaticResource MainButtonStyle}"
-					        Padding="0"
-					        FontSize="18"
-					        Width="40"
-					        Margin="0 0 15 0"
-					        Command="{Binding GoToBackCommand}"/>
-					
-					<Button Style="{StaticResource MainButtonStyle}"
-					        Command="{Binding ShowSettingsCommand}"
-					        Padding="3">
-						<Button.Content>
-							<Image Width="27"
-								   Height="27"
-								   Source="/Images/gear.png"/>
-						</Button.Content>
-					</Button>
-					<TextBlock Text="Name"
-							   Style="{StaticResource TextBlockStyle}"
-							   VerticalAlignment="Center"
-							   Margin="5 0"/>
-				</StackPanel>
-		        <Frame Grid.Row="1"
-		               Content="{Binding CurrentPage}"
-		               NavigationUIVisibility="Hidden"
-		               IsTabStop="False"/>
+                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">
+                    <Button Content="&lt;-"
+                            Style="{StaticResource MainButtonStyle}"
+                            Padding="0"
+                            FontSize="18"
+                            Width="40"
+                            Margin="0 0 15 0"
+                            Command="{Binding GoToBackCommand}" />
+
+                    <Button Style="{StaticResource MainButtonStyle}"
+                            Command="{Binding ShowSettingsCommand}"
+                            Padding="3">
+                        <Button.Content>
+                            <Image Width="27"
+                                   Height="27"
+                                   Source="/Images/gear.png" />
+                        </Button.Content>
+                    </Button>
+                    <TextBlock Text="Name"
+                               Style="{StaticResource TextBlockStyle}"
+                               VerticalAlignment="Center"
+                               Margin="5 0" />
+                </StackPanel>
+                <Frame Grid.Row="1"
+                       Content="{Binding CurrentPage}"
+                       NavigationUIVisibility="Hidden"
+                       IsTabStop="False" />
             </Grid>
         </controls:MenuBarPanel.Content>
     </controls:MenuBarPanel>
-    
+
 </Window>

@@ -7,11 +7,14 @@ namespace TaskManager.Models.Entities;
 
 public class Reminder : BindableBase, IDbEntity
 {
-    private Guid _id;
-    private DateTime _dueDate;
     private DateTime _createdAt;
-    
-    public Reminder() { Id = new Guid(); }
+    private DateTime _dueDate;
+    private Guid _id;
+
+    public Reminder()
+    {
+        Id = new Guid();
+    }
 
     [Key]
     public Guid Id
@@ -34,9 +37,7 @@ public class Reminder : BindableBase, IDbEntity
         set => SetProperty(ref _createdAt, value);
     }
 
-    [Required]
-    [ForeignKey("Task")]
-    public Guid TaskId { get; set; }
-    
+    [Required] [ForeignKey("Task")] public Guid TaskId { get; set; }
+
     public Task Task { get; set; }
 }

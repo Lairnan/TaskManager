@@ -16,19 +16,17 @@ public static class IoC
 {
     private static readonly IServiceProvider Provider;
 
-    public static T Resolve<T>() where T : notnull => Provider.GetRequiredService<T>();
-    
     static IoC()
     {
         var builder = new ConfigurationBuilder();
         builder.SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            .AddJsonFile("appsettings.json", false, true);
 
         var configuration = builder.Build();
-        
+
         var services = new ServiceCollection();
-        
-        services.AddDbContext<TaskManageDbContext, TaskManageContext>(s 
+
+        services.AddDbContext<TaskManageDbContext, TaskManageContext>(s
             => s.UseSqlite(configuration.GetConnectionString("sqlite")));
 
         // Services
@@ -38,10 +36,15 @@ public static class IoC
         // ViewModels
         services.AddTransient<MainViewModel>();
         services.AddScoped<ViewTasksViewModel>();
-        
+
         Provider = services.BuildServiceProvider();
 
         foreach (var service in services.Where(s => s.Lifetime == ServiceLifetime.Singleton))
             Provider.GetRequiredService(service.ServiceType);
+    }
+
+    public static T Resolve<T>() where T : notnull
+    {
+        return Provider.GetRequiredService<T>();
     }
 }

@@ -12,21 +12,21 @@ namespace TaskManager.ViewModels;
 
 public class MainViewModel : BindableBase
 {
-    private readonly TaskManageDbContext _taskManageContext;
     private readonly IPageService _pageService;
+    private readonly TaskManageDbContext _taskManageContext;
 
     private Page _currentPage = new();
-    private string _title = "Главное окно";
+    private ICommand? _goToBackCommand;
 
     private ICommand? _showSettingsCommand;
-    private ICommand? _goToBackCommand;
+    private string _title = "Главное окно";
 
     public MainViewModel(TaskManageDbContext taskManageContext, IPageService pageService)
     {
         _taskManageContext = taskManageContext;
         _pageService = pageService;
         _pageService.OnPageChanged += NavigateAction;
-        
+
         _pageService.Navigate(new ViewTasksPage());
 
         NavigationCommands.BrowseBack.InputGestures.Clear();
@@ -34,21 +34,13 @@ public class MainViewModel : BindableBase
         NavigationCommands.BrowseHome.InputGestures.Clear();
         NavigationCommands.BrowseStop.InputGestures.Clear();
     }
-    
-    private async void NavigateAction(Page page)
-    {
-        Title = page.Title;
-        
-        await Task.Delay(350);
-        CurrentPage = page;
-        await Task.Delay(25);
-    }
-    
+
     public Page CurrentPage
     {
         get => _currentPage;
         private set => SetProperty(ref _currentPage, value);
     }
+
     public string Title
     {
         get => _title;
@@ -60,8 +52,15 @@ public class MainViewModel : BindableBase
         MessageBox.Show("Work In Progress");
     });
 
-    public ICommand GoToBackCommand => _goToBackCommand ??= new DelegateCommand(() =>
+    public ICommand GoToBackCommand => _goToBackCommand ??=
+        new DelegateCommand(() => { _pageService.GoBack(); }, () => _pageService.CanGoBack);
+
+    private async void NavigateAction(Page page)
     {
-        _pageService.GoBack();
-    }, () => _pageService.CanGoBack);
+        Title = page.Title;
+
+        await Task.Delay(350);
+        CurrentPage = page;
+        await Task.Delay(25);
+    }
 }

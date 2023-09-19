@@ -25,6 +25,8 @@ public class EnumToLocalizedNameConverter : IValueConverter
         var fieldInfo = enumValue.GetType().GetField(enumValue.ToString());
         var descriptionAttributes = fieldInfo?.GetCustomAttributes(typeof(DescriptionAttribute), false);
 
-        return descriptionAttributes is { Length: > 0 } ? ((DescriptionAttribute)descriptionAttributes[0]).Description : enumValue.ToString();
+        return descriptionAttributes is { Length: > 0 }
+            ? ((DescriptionAttribute)descriptionAttributes[0]).Description
+            : enumValue.ToString();
     }
 }

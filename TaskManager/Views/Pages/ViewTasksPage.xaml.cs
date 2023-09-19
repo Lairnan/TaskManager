@@ -1,15 +1,14 @@
 ﻿using System.Windows.Controls;
 
-namespace TaskManager.Views.Pages
+namespace TaskManager.Views.Pages;
+
+/// <summary>
+///     Логика взаимодействия для ViewTasksPage.xaml
+/// </summary>
+public partial class ViewTasksPage : Page
 {
-    /// <summary>
-    /// Логика взаимодействия для ViewTasksPage.xaml
-    /// </summary>
-    public partial class ViewTasksPage : Page
+    public ViewTasksPage()
     {
-        public ViewTasksPage()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }
