@@ -13,6 +13,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
@@ -134,8 +135,13 @@
                                                 <DataTemplate>
                                                     <Border Background="DimGray" CornerRadius="5" Padding="5 2"
                                                             Margin="5 3">
-                                                        <TextBlock Text="{Binding Name}" FontSize="13"
-                                                                   Style="{StaticResource TextBlockStyle}" />
+                                                        <Button Content="{Binding Name}"
+																FontSize="13"
+																Style="{StaticResource ClearBtnStyle}"
+																Foreground="White"
+																Command="{Binding Path=DataContext.AddTagToFilterCommand,
+																                                    RelativeSource={RelativeSource AncestorType=Page}}"
+                                                                CommandParameter="{Binding}"/>
                                                     </Border>
                                                 </DataTemplate>
                                             </ItemsControl.ItemTemplate>
@@ -162,6 +168,70 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-        </Grid>
-    </Grid>
+		</Grid>
+
+
+		<ScrollViewer Grid.Row="2"
+					  Margin="0 15 0 0"
+					  MaxHeight="75"
+					  ScrollViewer.VerticalScrollBarVisibility="Auto">
+
+			<ScrollViewer.Style>
+				<Style TargetType="ScrollViewer">
+					<Setter Property="Visibility" Value="Visible"/>
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding FilterTag.Count}" Value="0">
+							<Setter Property="Visibility" Value="Collapsed"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</ScrollViewer.Style>
+			
+			<Grid Background="#222">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
+
+				<ItemsControl BorderThickness="0"
+							  BorderBrush="{x:Null}"
+							  ItemsSource="{Binding FilterTag}">
+
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<WrapPanel Orientation="Horizontal" Margin="5"/>
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<Border Background="#444"
+								Margin="5"
+								CornerRadius="10">
+								<Button Content="{Binding Name}"
+									FontSize="13"
+									Margin="10 2"
+									Foreground="White"
+									Style="{StaticResource ClearBtnStyle}"
+									Command="{Binding Path=DataContext.RemoveTagFromFilterCommand,
+								                            RelativeSource={RelativeSource AncestorType=Page}}"
+									CommandParameter="{Binding}"/>
+
+							</Border>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+
+				<Button Grid.Column="1"
+						Content="Очистить"
+						Margin="5"
+						FontSize="14"
+						Padding="5 2"
+						Style="{StaticResource MainButtonStyle}"
+                        Command="{Binding ClearTagsCommand}"/>
+
+			</Grid>
+
+		</ScrollViewer>
+	</Grid>
 </Page>

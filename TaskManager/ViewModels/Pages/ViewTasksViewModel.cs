@@ -18,8 +18,9 @@ public class ViewTasksViewModel : BindableBase
     private readonly IPageService _pageService;
     private readonly TaskManageDbContext _taskManageContext;
     private DelegateCommand<Tag>? _addTagToFilterCommand;
+    private DelegateCommand? _clearTagsCommand;
     private DateTime? _filterDate;
-    private IList<Tag> _filterTag = new List<Tag>();
+    private ObservableCollection<Tag> _filterTag = new();
 
     private string _filterText = string.Empty;
     private Task? _lastSelectedTask;
@@ -34,6 +35,7 @@ public class ViewTasksViewModel : BindableBase
         _pageService = pageService;
 
         FilterTasks(FilterText, FilterTag, FilterDate);
+        FilterTag.CollectionChanged += (s, e) => FilterTasks(FilterText, FilterTag, FilterDate);
     }
 
     public string FilterText
@@ -42,7 +44,7 @@ public class ViewTasksViewModel : BindableBase
         set => SetProperty(ref _filterText, value, () => FilterTasks(value, _filterTag, _filterDate));
     }
 
-    public IList<Tag> FilterTag
+    public ObservableCollection<Tag> FilterTag
     {
         get => _filterTag;
         set => SetProperty(ref _filterTag, value, () => FilterTasks(_filterText, value, _filterDate));
@@ -88,6 +90,11 @@ public class ViewTasksViewModel : BindableBase
     public ICommand AddTagToFilterCommand => _addTagToFilterCommand ??= new DelegateCommand<Tag>(tag =>
     {
         if (!FilterTag.Select(s => s.Id).Contains(tag.Id)) FilterTag.Add(tag);
+    });
+
+    public ICommand ClearTagsCommand => _clearTagsCommand ??= new DelegateCommand(() =>
+    {
+        FilterTag.Clear();
     });
 
     private async void FilterTasks(string text, IList<Tag> tags, DateTime? date)
