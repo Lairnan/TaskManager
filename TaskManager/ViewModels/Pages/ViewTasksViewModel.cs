@@ -25,6 +25,7 @@ public class ViewTasksViewModel : BindableBase
     private string _filterText = string.Empty;
     private Task? _lastSelectedTask;
     private DelegateCommand<Task>? _mouseLeftButtonUpCommand;
+    private DelegateCommand<Task>? _openTaskTagsWindowCommand;
     private DelegateCommand<Tag>? _removeTagFromFilterCommand;
     private Task? _selectedTask;
     private ObservableCollection<Task> _tasksCollection = null!;
@@ -95,6 +96,11 @@ public class ViewTasksViewModel : BindableBase
     public ICommand ClearTagsCommand => _clearTagsCommand ??= new DelegateCommand(() =>
     {
         FilterTag.Clear();
+    }, () => FilterTag.Any()); // TODO: Кнопка вечно не доступна.
+
+    public ICommand OpenTaskTagsWindowCommand => _openTaskTagsWindowCommand ??= new DelegateCommand<Task>(task =>
+    {
+        // TODO: Сделать открытие нового окна с редактированием списка тегов задачи.
     });
 
     private async void FilterTasks(string text, IList<Tag> tags, DateTime? date)

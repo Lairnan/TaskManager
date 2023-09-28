@@ -7,7 +7,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <local:ViewModelLocator x:Key="VmLocator" />
-            <converter:EnumToLocalizedNameConverter x:Key="EnumToLocalizedNameConverter" />
+            <converter:EnumDescriptionConverter x:Key="EnumDescriptionConverter" />
+            <converter:DayOfWeekRussianConverter x:Key="DayOfWeekRussianConverter" />
 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/MainResource.xaml" />

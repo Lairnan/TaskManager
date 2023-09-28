@@ -5,7 +5,7 @@ using System.Windows.Data;
 
 namespace TaskManager.Converter;
 
-public class EnumToLocalizedNameConverter : IValueConverter
+public class EnumDescriptionConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
