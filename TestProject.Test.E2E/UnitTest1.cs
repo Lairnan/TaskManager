@@ -29,8 +29,9 @@ public class Tests
 
             driver.FindElementByAccessibilityId("AddTagToFilterButton").Click();
             var clearTag = driver.FindElementByAccessibilityId("ClearTagsButton");
-            // Assert.That(clearTag.Enabled, Is.EqualTo(true)); TODO: Кнопка очистки вечно недоступна.
+            Assert.That(clearTag.Enabled, Is.EqualTo(true));
             clearTag.Click();
+            Assert.That(clearTag.Enabled, Is.EqualTo(false));
         }
         finally
         {

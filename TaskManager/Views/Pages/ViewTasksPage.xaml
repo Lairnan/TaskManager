@@ -220,7 +220,7 @@
                         Padding="5 2"
                         AutomationProperties.AutomationId="ClearTagsButton"
                         Style="{StaticResource MainButtonStyle}"
-                        Command="{Binding ClearTagsCommand, UpdateSourceTrigger=PropertyChanged}"/>
+                        Command="{Binding ClearTagsCommand}"/>
 
             </Grid>
 

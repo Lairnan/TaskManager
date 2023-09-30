@@ -96,7 +96,7 @@ public class ViewTasksViewModel : BindableBase
     public ICommand ClearTagsCommand => _clearTagsCommand ??= new DelegateCommand(() =>
     {
         FilterTag.Clear();
-    }, () => FilterTag.Any()); // TODO: Кнопка вечно не доступна.
+    }, () => FilterTag.Any()).ObservesProperty(() => FilterTag.Count);
 
     public ICommand OpenTaskTagsWindowCommand => _openTaskTagsWindowCommand ??= new DelegateCommand<Task>(task =>
     {

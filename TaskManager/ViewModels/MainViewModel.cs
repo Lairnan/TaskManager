@@ -53,7 +53,7 @@ public class MainViewModel : BindableBase
     });
 
     public ICommand GoToBackCommand => _goToBackCommand ??=
-        new DelegateCommand(() => { _pageService.GoBack(); }, () => _pageService.CanGoBack);
+        new DelegateCommand(() => _pageService.GoBack(), () => _pageService.CanGoBack);
 
     private async void NavigateAction(Page page)
     {
