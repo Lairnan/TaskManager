@@ -20,6 +20,7 @@ public class ViewTasksViewModel : BindableBase
     private DelegateCommand<Tag>? _addTagToFilterCommand;
     private DelegateCommand? _clearTagsCommand;
     private DateTime? _filterDate;
+    private Tag? _filterTag;
     private ObservableCollection<Tag> _filterTagsCollection = new();
 
     private string _filterText = string.Empty;
@@ -28,9 +29,8 @@ public class ViewTasksViewModel : BindableBase
     private DelegateCommand<Task>? _openTaskTagsWindowCommand;
     private DelegateCommand<Tag>? _removeTagFromFilterCommand;
     private Task? _selectedTask;
-    private ObservableCollection<Task> _tasksCollection = null!;
-    private Tag? _filterTag;
     private ObservableCollection<Tag> _tagsCollection = new();
+    private ObservableCollection<Task> _tasksCollection = null!;
 
     public ViewTasksViewModel(TaskManageDbContext taskManageContext, IPageService pageService)
     {
@@ -41,12 +41,6 @@ public class ViewTasksViewModel : BindableBase
 
         FilterTasks(FilterText, FilterTagsCollection, FilterDate);
         FilterTagsCollection.CollectionChanged += (s, e) => FilterTasks(FilterText, FilterTagsCollection, FilterDate);
-    }
-
-    private async void LoadTagsAsync(TaskManageDbContext taskManageContext)
-    {
-        var list = await taskManageContext.Tags.ToListAsync();
-        TagsCollection = new ObservableCollection<Tag>(list);
     }
 
     public string FilterText
@@ -70,7 +64,7 @@ public class ViewTasksViewModel : BindableBase
     public ObservableCollection<Tag> TagsCollection
     {
         get => _tagsCollection;
-        set => SetProperty(ref _tagsCollection, value);
+        private set => SetProperty(ref _tagsCollection, value);
     }
 
     public DateTime? FilterDate
@@ -110,20 +104,25 @@ public class ViewTasksViewModel : BindableBase
         if (FilterTagsCollection.Select(s => s.Id).Contains(tag.Id)) FilterTagsCollection.Remove(tag);
     });
 
-    public ICommand AddTagToFilterCommand => _addTagToFilterCommand ??= new DelegateCommand<Tag>(tag =>
-    {
-        FilterTagsCollection.Add(tag);
-    }, tag => tag != null && !FilterTagsCollection.Select(s => s.Id).Contains(tag.Id)).ObservesProperty(() => FilterTagsCollection.Count);
+    public ICommand AddTagToFilterCommand => _addTagToFilterCommand ??=
+        new DelegateCommand<Tag>(tag => { FilterTagsCollection.Add(tag); },
+                tag => tag != null && !FilterTagsCollection.Select(s => s.Id).Contains(tag.Id))
+            .ObservesProperty(() => FilterTagsCollection.Count);
 
-    public ICommand ClearTagsCommand => _clearTagsCommand ??= new DelegateCommand(() =>
-    {
-        FilterTagsCollection.Clear();
-    }, () => FilterTagsCollection.Any()).ObservesProperty(() => FilterTagsCollection.Count);
+    public ICommand ClearTagsCommand => _clearTagsCommand ??=
+        new DelegateCommand(() => { FilterTagsCollection.Clear(); }, () => FilterTagsCollection.Any()).ObservesProperty(
+            () => FilterTagsCollection.Count);
 
     public ICommand OpenTaskTagsWindowCommand => _openTaskTagsWindowCommand ??= new DelegateCommand<Task>(task =>
     {
         // TODO: Сделать открытие нового окна с редактированием списка тегов задачи.
     });
+
+    private async void LoadTagsAsync(TaskManageDbContext taskManageContext)
+    {
+        var list = await taskManageContext.Tags.ToListAsync();
+        TagsCollection = new ObservableCollection<Tag>(list);
+    }
 
     private async void FilterTasks(string text, IList<Tag> tags, DateTime? date)
     {
