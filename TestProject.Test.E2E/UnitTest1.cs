@@ -21,6 +21,8 @@ public class Tests
         
         var driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723/"),
             options);
+        
+        Thread.Sleep(500);
 
         try
         {

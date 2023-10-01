@@ -20,7 +20,7 @@ public class ViewTasksViewModel : BindableBase
     private DelegateCommand<Tag>? _addTagToFilterCommand;
     private DelegateCommand? _clearTagsCommand;
     private DateTime? _filterDate;
-    private ObservableCollection<Tag> _filterTag = new();
+    private ObservableCollection<Tag> _filterTagsCollection = new();
 
     private string _filterText = string.Empty;
     private Task? _lastSelectedTask;
@@ -29,32 +29,54 @@ public class ViewTasksViewModel : BindableBase
     private DelegateCommand<Tag>? _removeTagFromFilterCommand;
     private Task? _selectedTask;
     private ObservableCollection<Task> _tasksCollection = null!;
+    private Tag? _filterTag;
+    private ObservableCollection<Tag> _tagsCollection = new();
 
     public ViewTasksViewModel(TaskManageDbContext taskManageContext, IPageService pageService)
     {
         _taskManageContext = taskManageContext;
         _pageService = pageService;
 
-        FilterTasks(FilterText, FilterTag, FilterDate);
-        FilterTag.CollectionChanged += (s, e) => FilterTasks(FilterText, FilterTag, FilterDate);
+        LoadTagsAsync(taskManageContext);
+
+        FilterTasks(FilterText, FilterTagsCollection, FilterDate);
+        FilterTagsCollection.CollectionChanged += (s, e) => FilterTasks(FilterText, FilterTagsCollection, FilterDate);
+    }
+
+    private async void LoadTagsAsync(TaskManageDbContext taskManageContext)
+    {
+        var list = await taskManageContext.Tags.ToListAsync();
+        TagsCollection = new ObservableCollection<Tag>(list);
     }
 
     public string FilterText
     {
         get => _filterText;
-        set => SetProperty(ref _filterText, value, () => FilterTasks(value, _filterTag, _filterDate));
+        set => SetProperty(ref _filterText, value, () => FilterTasks(value, _filterTagsCollection, _filterDate));
     }
 
-    public ObservableCollection<Tag> FilterTag
+    public Tag? FilterTag
     {
         get => _filterTag;
-        set => SetProperty(ref _filterTag, value, () => FilterTasks(_filterText, value, _filterDate));
+        set => SetProperty(ref _filterTag, value);
+    }
+
+    public ObservableCollection<Tag> FilterTagsCollection
+    {
+        get => _filterTagsCollection;
+        set => SetProperty(ref _filterTagsCollection, value, () => FilterTasks(_filterText, value, _filterDate));
+    }
+
+    public ObservableCollection<Tag> TagsCollection
+    {
+        get => _tagsCollection;
+        set => SetProperty(ref _tagsCollection, value);
     }
 
     public DateTime? FilterDate
     {
         get => _filterDate;
-        set => SetProperty(ref _filterDate, value, () => FilterTasks(_filterText, _filterTag, value));
+        set => SetProperty(ref _filterDate, value, () => FilterTasks(_filterText, _filterTagsCollection, value));
     }
 
     public ObservableCollection<Task> TasksCollection
@@ -85,18 +107,18 @@ public class ViewTasksViewModel : BindableBase
 
     public ICommand RemoveTagFromFilterCommand => _removeTagFromFilterCommand ??= new DelegateCommand<Tag>(tag =>
     {
-        if (FilterTag.Select(s => s.Id).Contains(tag.Id)) FilterTag.Remove(tag);
+        if (FilterTagsCollection.Select(s => s.Id).Contains(tag.Id)) FilterTagsCollection.Remove(tag);
     });
 
     public ICommand AddTagToFilterCommand => _addTagToFilterCommand ??= new DelegateCommand<Tag>(tag =>
     {
-        if (!FilterTag.Select(s => s.Id).Contains(tag.Id)) FilterTag.Add(tag);
-    });
+        FilterTagsCollection.Add(tag);
+    }, tag => tag != null && !FilterTagsCollection.Select(s => s.Id).Contains(tag.Id)).ObservesProperty(() => FilterTagsCollection.Count);
 
     public ICommand ClearTagsCommand => _clearTagsCommand ??= new DelegateCommand(() =>
     {
-        FilterTag.Clear();
-    }, () => FilterTag.Any()).ObservesProperty(() => FilterTag.Count);
+        FilterTagsCollection.Clear();
+    }, () => FilterTagsCollection.Any()).ObservesProperty(() => FilterTagsCollection.Count);
 
     public ICommand OpenTaskTagsWindowCommand => _openTaskTagsWindowCommand ??= new DelegateCommand<Task>(task =>
     {

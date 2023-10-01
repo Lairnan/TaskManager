@@ -171,59 +171,90 @@
             </ItemsControl>
         </Grid>
 
+        <Grid Grid.Row="2"
+              Margin="0 15 0 0"
+              MaxHeight="125">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-        <ScrollViewer Grid.Row="2"
-                      Margin="0 15 0 0"
-                      MaxHeight="75"
-                      VerticalScrollBarVisibility="Auto">
+			<Grid Margin="0 3">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
 
-            <Grid Background="#222">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
+				<ComboBox ItemsSource="{Binding TagsCollection, UpdateSourceTrigger=PropertyChanged}"
+						  SelectedItem="{Binding FilterTag, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+						  DisplayMemberPath="Name"
+						  IsEditable="True">
+					<ComboBox.InputBindings>
+						<KeyBinding Gesture="Enter"
+									Command="{Binding AddTagToFilterCommand}"
+									CommandParameter="{Binding FilterTag}"/>
+					</ComboBox.InputBindings>
+				</ComboBox>
+				<Button Grid.Column="1"
+						Style="{StaticResource MainButtonStyle}"
+						Content="Добавить"
+						Margin="5 0"
+						Command="{Binding AddTagToFilterCommand}"
+						CommandParameter="{Binding FilterTag}"/>
+			</Grid>
 
-                <ItemsControl BorderThickness="0"
-                              BorderBrush="{x:Null}"
-                              ItemsSource="{Binding FilterTag}">
+			<ScrollViewer Grid.Row="1"
+                          MaxHeight="75"
+                          VerticalScrollBarVisibility="Auto">
 
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Horizontal" Margin="5" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
+				<Grid Background="#222">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
 
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Border Background="#444"
-                                    Margin="5"
-                                    CornerRadius="10">
-                                <Button Content="{Binding Name}"
-                                        FontSize="13"
-                                        Margin="10 2"
-                                        Foreground="White"
-                                        AutomationProperties.AutomationId="RemoveTagFromFilterButton"
-                                        Style="{StaticResource ClearBtnStyle}"
-                                        Command="{Binding Path=DataContext.RemoveTagFromFilterCommand,
-								                            RelativeSource={RelativeSource AncestorType=Page}}"
-                                        CommandParameter="{Binding}" />
+					<ItemsControl BorderThickness="0"
+                                  BorderBrush="{x:Null}"
+                                  ItemsSource="{Binding FilterTagsCollection}">
 
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+						<ItemsControl.ItemsPanel>
+							<ItemsPanelTemplate>
+								<WrapPanel Orientation="Horizontal" Margin="5" />
+							</ItemsPanelTemplate>
+						</ItemsControl.ItemsPanel>
 
-                <Button Grid.Column="1"
-                        Content="Очистить"
-                        Margin="5"
-                        FontSize="14"
-                        Padding="5 2"
-                        AutomationProperties.AutomationId="ClearTagsButton"
-                        Style="{StaticResource MainButtonStyle}"
-                        Command="{Binding ClearTagsCommand}"/>
+						<ItemsControl.ItemTemplate>
+							<DataTemplate>
+								<Border Background="#444"
+                                        Margin="5"
+                                        CornerRadius="10">
+									<Button Content="{Binding Name}"
+                                            FontSize="13"
+                                            Margin="10 2"
+                                            Foreground="White"
+                                            AutomationProperties.AutomationId="RemoveTagFromFilterButton"
+                                            Style="{StaticResource ClearBtnStyle}"
+                                            Command="{Binding Path=DataContext.RemoveTagFromFilterCommand,
+								                                RelativeSource={RelativeSource AncestorType=Page}}"
+                                            CommandParameter="{Binding}" />
 
-            </Grid>
+								</Border>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
 
-        </ScrollViewer>
+					<Button Grid.Column="1"
+                            Content="Очистить"
+                            Margin="5"
+                            FontSize="14"
+                            Padding="5 2"
+                            AutomationProperties.AutomationId="ClearTagsButton"
+                            Style="{StaticResource MainButtonStyle}"
+                            Command="{Binding ClearTagsCommand}"/>
+
+				</Grid>
+
+			</ScrollViewer>
+		</Grid>
     </Grid>
 </Page>
