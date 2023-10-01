@@ -20,7 +20,7 @@ public class ViewTasksViewModel : BindableBase
     private DelegateCommand<Tag>? _addTagToFilterCommand;
     private DelegateCommand? _clearTagsCommand;
     private DateTime? _filterDate;
-    private Tag? _filterTag;
+    private Tag? _selectedTag;
     private ObservableCollection<Tag> _filterTagsCollection = new();
 
     private string _filterText = string.Empty;
@@ -49,10 +49,10 @@ public class ViewTasksViewModel : BindableBase
         set => SetProperty(ref _filterText, value, () => FilterTasks(value, _filterTagsCollection, _filterDate));
     }
 
-    public Tag? FilterTag
+    public Tag? SelectedTag
     {
-        get => _filterTag;
-        set => SetProperty(ref _filterTag, value);
+        get => _selectedTag;
+        set => SetProperty(ref _selectedTag, value);
     }
 
     public ObservableCollection<Tag> FilterTagsCollection
@@ -105,7 +105,11 @@ public class ViewTasksViewModel : BindableBase
     });
 
     public ICommand AddTagToFilterCommand => _addTagToFilterCommand ??=
-        new DelegateCommand<Tag>(tag => { FilterTagsCollection.Add(tag); },
+        new DelegateCommand<Tag>(tag =>
+                {
+                    FilterTagsCollection.Add(tag);
+                    SelectedTag = null;
+                },
                 tag => tag != null && !FilterTagsCollection.Select(s => s.Id).Contains(tag.Id))
             .ObservesProperty(() => FilterTagsCollection.Count);
 

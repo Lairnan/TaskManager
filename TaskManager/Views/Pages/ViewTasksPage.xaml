@@ -186,13 +186,14 @@
                 </Grid.ColumnDefinitions>
 
                 <ComboBox ItemsSource="{Binding TagsCollection, UpdateSourceTrigger=PropertyChanged}"
-                          SelectedItem="{Binding FilterTag, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                          SelectedItem="{Binding SelectedTag, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                           DisplayMemberPath="Name"
+                          Style="{StaticResource ComboBoxStyle}"
                           IsEditable="True">
                     <ComboBox.InputBindings>
                         <KeyBinding Gesture="Enter"
                                     Command="{Binding AddTagToFilterCommand}"
-                                    CommandParameter="{Binding FilterTag}" />
+                                    CommandParameter="{Binding SelectedTag}" />
                     </ComboBox.InputBindings>
                 </ComboBox>
                 <Button Grid.Column="1"
@@ -200,7 +201,7 @@
                         Content="Добавить"
                         Margin="5 0"
                         Command="{Binding AddTagToFilterCommand}"
-                        CommandParameter="{Binding FilterTag}" />
+                        CommandParameter="{Binding SelectedTag}" />
             </Grid>
 
             <ScrollViewer Grid.Row="1"
