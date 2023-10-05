@@ -10,7 +10,7 @@ public interface IDbEntity
 {
 }
 
-public class TaskManageContext : TaskManageDbContext
+public sealed class TaskManageContext : TaskManageDbContext
 {
     public TaskManageContext(DbContextOptions<TaskManageContext> options) : base(options)
     {
@@ -30,7 +30,7 @@ public class TaskManageContext : TaskManageDbContext
             Completed = false,
             Recurring = false,
             Interval = RecurringInterval.Weekly,
-            WeeklyRecurrenceDays = new HashSet<DayOfWeek>
+            WeeklyRecurrenceDays = new List<DayOfWeek>
             {
                 DayOfWeek.Monday,
                 DayOfWeek.Wednesday,
@@ -56,7 +56,7 @@ public class TaskManageContext : TaskManageDbContext
             Completed = false,
             Recurring = true,
             Interval = RecurringInterval.Monthly,
-            WeeklyRecurrenceDays = new HashSet<DayOfWeek>
+            WeeklyRecurrenceDays = new List<DayOfWeek>
             {
                 DayOfWeek.Monday
             },

@@ -18,7 +18,7 @@ public class Task : BindableBase, IDbEntity
     private string _name;
     private int _priority;
     private bool _recurring;
-    private HashSet<DayOfWeek>? _weeklyRecurrenceDays = new();
+    private List<DayOfWeek>? _weeklyRecurrenceDays = new();
     private Guid _id = Guid.NewGuid();
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
@@ -79,7 +79,7 @@ public class Task : BindableBase, IDbEntity
         set => SetProperty(ref _interval, value);
     }
 
-    public HashSet<DayOfWeek>? WeeklyRecurrenceDays
+    public List<DayOfWeek>? WeeklyRecurrenceDays
     {
         get => _weeklyRecurrenceDays;
         set => SetProperty(ref _weeklyRecurrenceDays, value);

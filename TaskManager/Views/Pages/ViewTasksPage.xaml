@@ -4,12 +4,33 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
+      xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+      xmlns:entity="clr-namespace:TaskManager.Models.Entities"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       DataContext="{Binding ViewTasksViewModel, Source={StaticResource VmLocator}}"
       mc:Ignorable="d"
       d:DesignHeight="450"
       d:DesignWidth="800"
       Title="Список задач">
-    <Grid>
+
+	<Page.Resources>
+		<ObjectDataProvider x:Key="RecurringIntervalValues"
+							ObjectType="{x:Type sys:Enum}"
+							MethodName="GetValues">
+			<ObjectDataProvider.MethodParameters>
+                <x:Type Type="entity:RecurringInterval"/>
+            </ObjectDataProvider.MethodParameters>
+		</ObjectDataProvider>
+		<ObjectDataProvider x:Key="DayOfWeekValues"
+							ObjectType="{x:Type sys:Enum}"
+							MethodName="GetValues">
+			<ObjectDataProvider.MethodParameters>
+                <x:Type Type="sys:DayOfWeek"/>
+            </ObjectDataProvider.MethodParameters>
+		</ObjectDataProvider>
+	</Page.Resources>
+	
+	<Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
@@ -43,7 +64,7 @@
                 </StackPanel.Style>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <TextBlock Text="Название: "
-                               Width="80"
+                               Width="90"
                                TextWrapping="Wrap"
                                Margin="0 7 0 0"
                                Style="{StaticResource TextBlockStyle}" />
@@ -52,19 +73,18 @@
                              Style="{StaticResource TextBoxStyle}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <TextBlock Text="Название: "
-                               Width="80"
+                    <TextBlock Text="Описание: "
+                               Width="90"
                                TextWrapping="Wrap"
                                Margin="0 7 0 0"
                                Style="{StaticResource TextBlockStyle}" />
-                    <TextBox
-                        Text="{Binding SelectedTask.Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                        Width="110"
-                        Style="{StaticResource TextBoxStyle}" />
+                    <TextBox Text="{Binding SelectedTask.Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                             Width="110"
+                             Style="{StaticResource TextBoxStyle}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <TextBlock Text="Название: "
-                               Width="80"
+                    <TextBlock Text="Приоритет: "
+                               Width="90"
                                TextWrapping="Wrap"
                                Margin="0 7 0 0"
                                Style="{StaticResource TextBlockStyle}" />
@@ -73,14 +93,46 @@
                              Style="{StaticResource TextBoxStyle}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <TextBlock Text="Название: "
-                               Width="80"
+                    <TextBlock Text="Повтор: "
+                               Width="90"
                                TextWrapping="Wrap"
                                Margin="0 7 0 0"
                                Style="{StaticResource TextBlockStyle}" />
-                    <TextBox Text="{Binding SelectedTask.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                             Width="110"
-                             Style="{StaticResource TextBoxStyle}" />
+					<ComboBox Style="{StaticResource ComboBoxStyle}"
+							  Width="110"
+							  Margin="0 7 0 0"
+							  ItemsSource="{Binding Source={StaticResource RecurringIntervalValues}}"
+							  SelectedItem="{Binding SelectedTask.Interval, UpdateSourceTrigger=PropertyChanged}">
+						<ComboBox.ItemTemplate>
+							<DataTemplate>
+								<TextBlock Text="{Binding Converter={StaticResource EnumDescriptionConverter}}"
+										   Style="{StaticResource ComboBoxTextBlockStyle}"/>
+							</DataTemplate>
+						</ComboBox.ItemTemplate>
+					</ComboBox>
+				</StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Напоминание: "
+                               Width="90"
+                               TextWrapping="Wrap"
+                               Margin="0 7 0 0"
+                               Style="{StaticResource TextBlockStyle}" />
+                    <xctk:CheckComboBox SelectedItemsOverride="{Binding SelectedTask.WeeklyRecurrenceDays, UpdateSourceTrigger=PropertyChanged}"
+                                        ItemsSource="{Binding Source={StaticResource DayOfWeekValues}}"
+                                        Width="110"
+                                        Margin="0 7 0 0"
+										Background="Transparent"
+										Foreground="White"
+										FontSize="14"
+										Padding="3"
+                                        Delimiter=", ">
+                        <xctk:CheckComboBox.ItemTemplate>
+                            <DataTemplate>
+								<TextBlock Text="{Binding Converter={StaticResource DayOfWeekRussianConverter}}"
+										   Foreground="Black"/>
+                            </DataTemplate>
+                        </xctk:CheckComboBox.ItemTemplate>
+                    </xctk:CheckComboBox>
                 </StackPanel>
             </StackPanel>
 
@@ -106,18 +158,17 @@
                                 <CheckBox Grid.Column="0"
                                           IsChecked="{Binding Completed, UpdateSourceTrigger=PropertyChanged}"
                                           VerticalAlignment="Center" Margin="5" />
-                                <Grid Grid.Column="1" Margin="0 0 0 10">
+                                <Grid Grid.Column="1" Margin="0 0 0 10" ShowGridLines="True">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition />
-                                        <ColumnDefinition Width="200" />
+										<ColumnDefinition Width="1*" MinWidth="100" />
+										<ColumnDefinition Width="200" />
                                     </Grid.ColumnDefinitions>
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
-                                        <StackPanel>
+                                        <StackPanel HorizontalAlignment="Left">
                                             <TextBlock Text="{Binding Name}" FontWeight="Bold"
                                                        Style="{StaticResource TextBlockStyle}" />
                                             <TextBlock Text="{Binding Description}"
@@ -148,7 +199,7 @@
                                             </ItemsControl.ItemTemplate>
                                         </ItemsControl>
                                     </Grid>
-                                    <StackPanel Grid.Column="2" Grid.Row="0">
+                                    <StackPanel Grid.Column="1" Grid.Row="0">
                                         <TextBlock
                                             Text="{Binding DueDate, StringFormat='{}Время напоминания: {0:dd.MM.yy, HH:mm}', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}"
                                             Style="{StaticResource TextBlockStyle}"

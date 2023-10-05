@@ -9,10 +9,7 @@ public class EnumDescriptionConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value == null) return null;
-
-        var enumValue = (Enum)value;
-        return GetDescription(enumValue);
+        return value is not Enum enumValue ? null : GetDescription(enumValue);
     }
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
