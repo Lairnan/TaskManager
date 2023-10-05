@@ -188,6 +188,7 @@
                 <ComboBox ItemsSource="{Binding TagsCollection, UpdateSourceTrigger=PropertyChanged}"
                           SelectedItem="{Binding SelectedTag, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                           DisplayMemberPath="Name"
+                          AutomationProperties.AutomationId="TagsCollectionComboBox"
                           Style="{StaticResource ComboBoxStyle}"
                           IsEditable="True">
                     <ComboBox.InputBindings>
@@ -197,6 +198,7 @@
                     </ComboBox.InputBindings>
                 </ComboBox>
                 <Button Grid.Column="1"
+                        AutomationProperties.AutomationId="AddFilterFromComboBoxButton"
                         Style="{StaticResource MainButtonStyle}"
                         Content="Добавить"
                         Margin="5 0"
@@ -215,6 +217,7 @@
                     </Grid.ColumnDefinitions>
 
                     <ItemsControl BorderThickness="0"
+                                  AutomationProperties.AutomationId="FilterTagsItemsControl"
                                   BorderBrush="{x:Null}"
                                   ItemsSource="{Binding FilterTagsCollection}">
 

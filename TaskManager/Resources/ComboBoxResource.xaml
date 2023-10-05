@@ -119,7 +119,9 @@
                                               Width="{Binding RelativeSource={RelativeSource AncestorType=ComboBox}, Path=ActualWidth}"
                                               HorizontalScrollBarVisibility="Disabled"
                                               SnapsToDevicePixels="True">
-                                    <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
+                                    <StackPanel IsItemsHost="True"
+                                                KeyboardNavigation.DirectionalNavigation="Cycle"
+                                                AutomationProperties.AutomationId="ComboBoxItem" />
                                 </ScrollViewer>
                             </Grid>
                         </Popup>
