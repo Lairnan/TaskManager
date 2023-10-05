@@ -9,6 +9,7 @@ namespace TaskManager.Models.Entities;
 
 public class Task : BindableBase, IDbEntity
 {
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     private bool _completed;
     private DateTime _createdAt;
     private string _description;
@@ -18,13 +19,15 @@ public class Task : BindableBase, IDbEntity
     private int _priority;
     private bool _recurring;
     private HashSet<DayOfWeek>? _weeklyRecurrenceDays = new();
+    private Guid _id = Guid.NewGuid();
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
-    public Task()
+    [Key]
+    public Guid Id
     {
-        Id = new Guid();
+        get => _id;
+        set => SetProperty(ref _id, value);
     }
-
-    [Key] public Guid Id { get; set; }
 
     [Required]
     [StringLength(255)]
@@ -91,7 +94,7 @@ public class Task : BindableBase, IDbEntity
 
     [ForeignKey("Tag")] public List<Tag> Tags { get; } = new();
 
-    public List<Reminder> Reminders { get; } = new();
+    public IEnumerable<Reminder> Reminders { get; } = new List<Reminder>();
 }
 
 public enum RecurringInterval

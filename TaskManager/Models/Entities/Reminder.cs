@@ -7,14 +7,12 @@ namespace TaskManager.Models.Entities;
 
 public class Reminder : BindableBase, IDbEntity
 {
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     private DateTime _createdAt;
     private DateTime _dueDate;
-    private Guid _id;
-
-    public Reminder()
-    {
-        Id = new Guid();
-    }
+    private Guid _id = Guid.NewGuid();
+    private Task _task;
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
     [Key]
     public Guid Id
@@ -37,7 +35,13 @@ public class Reminder : BindableBase, IDbEntity
         set => SetProperty(ref _createdAt, value);
     }
 
-    [Required] [ForeignKey("Task")] public Guid TaskId { get; set; }
-
-    public Task Task { get; set; }
+    [Required]
+    [ForeignKey("Task")]
+    public Guid TaskId { get; set; }
+    
+    public required Task Task
+    {
+        get => _task;
+        set => SetProperty(ref _task, value);
+    }
 }
