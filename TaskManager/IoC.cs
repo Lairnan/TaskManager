@@ -46,7 +46,5 @@ public static class IoC
     }
 
     public static T Resolve<T>() where T : notnull
-    {
-        return Provider.GetRequiredService<T>();
-    }
+        => Provider.GetRequiredService<T>();
 }
