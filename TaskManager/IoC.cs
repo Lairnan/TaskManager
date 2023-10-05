@@ -29,6 +29,8 @@ public static class IoC
         services.AddDbContext<TaskManageDbContext, TaskManageContext>(s
             => s.UseSqlite(configuration.GetConnectionString("sqlite")));
 
+        services.AddSingleton(configuration);
+
         // Services
         services.AddScoped<IPageService, PageService>();
         services.AddSingleton<ISynchronizeService, SynchronizeService>();
