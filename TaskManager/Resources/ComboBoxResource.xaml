@@ -76,30 +76,8 @@
                                  Padding="10 3"
                                  Focusable="True"
                                  Visibility="Hidden"
-                                 IsReadOnly="{TemplateBinding IsReadOnly}">
-                            <TextBox.Triggers>
-                                <EventTrigger RoutedEvent="GotFocus">
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="Popup"
-                                                                            Storyboard.TargetProperty="IsOpen">
-                                                <DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="True"/>
-                                            </BooleanAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                                <EventTrigger RoutedEvent="LostFocus">
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="Popup"
-                                                                            Storyboard.TargetProperty="IsOpen">
-                                                <DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="False"/>
-                                            </BooleanAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </TextBox.Triggers>
-                        </TextBox>
+                                 IsReadOnly="{TemplateBinding IsReadOnly}"
+                                 IsHitTestVisible="False"/>
                         <Popup x:Name="Popup"
                                Placement="Bottom"
                                HorizontalAlignment="Center"
