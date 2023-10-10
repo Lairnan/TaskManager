@@ -88,7 +88,7 @@
                                TextWrapping="Wrap"
                                Margin="0 7 0 0"
                                Style="{StaticResource TextBlockStyle}" />
-                    <TextBox Text="{Binding SelectedTask.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    <TextBox Text="{Binding SelectedTask.Priority, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                              Width="110"
                              Style="{StaticResource TextBoxStyle}" />
                 </StackPanel>
@@ -100,7 +100,7 @@
                                Style="{StaticResource TextBlockStyle}" />
 					<ComboBox Style="{StaticResource ComboBoxStyle}"
 							  Width="110"
-							  Margin="0 7 0 0"
+							  Margin="5"
 							  ItemsSource="{Binding Source={StaticResource RecurringIntervalValues}}"
 							  SelectedItem="{Binding SelectedTask.Interval, UpdateSourceTrigger=PropertyChanged}">
 						<ComboBox.ItemTemplate>
@@ -120,7 +120,7 @@
                     <xctk:CheckComboBox SelectedItemsOverride="{Binding SelectedTask.WeeklyRecurrenceDays, UpdateSourceTrigger=PropertyChanged}"
                                         ItemsSource="{Binding Source={StaticResource DayOfWeekValues}}"
                                         Width="110"
-                                        Margin="0 7 0 0"
+                                        Margin="5"
 										Background="Transparent"
 										Foreground="White"
 										FontSize="14"
@@ -129,7 +129,7 @@
                         <xctk:CheckComboBox.ItemTemplate>
                             <DataTemplate>
 								<TextBlock Text="{Binding Converter={StaticResource DayOfWeekRussianConverter}}"
-										   Foreground="Black"/>
+                                           Style="{StaticResource ComboBoxTextBlockStyle}"/>
                             </DataTemplate>
                         </xctk:CheckComboBox.ItemTemplate>
                     </xctk:CheckComboBox>

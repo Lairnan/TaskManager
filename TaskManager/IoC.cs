@@ -37,6 +37,7 @@ public static class IoC
 
         // ViewModels
         services.AddTransient<MainViewModel>();
+        services.AddTransient<AdditionalViewModel>();
         services.AddScoped<ViewTasksViewModel>();
 
         Provider = services.BuildServiceProvider();
