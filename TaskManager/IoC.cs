@@ -14,7 +14,7 @@ namespace TaskManager;
 
 public static class IoC
 {
-    private static readonly IServiceProvider Provider;
+    private static readonly IServiceProvider provider;
 
     static IoC()
     {
@@ -40,12 +40,12 @@ public static class IoC
         services.AddTransient<AdditionalViewModel>();
         services.AddScoped<ViewTasksViewModel>();
 
-        Provider = services.BuildServiceProvider();
+        provider = services.BuildServiceProvider();
 
         foreach (var service in services.Where(s => s.Lifetime == ServiceLifetime.Singleton))
-            Provider.GetRequiredService(service.ServiceType);
+            provider.GetRequiredService(service.ServiceType);
     }
 
     public static T Resolve<T>() where T : notnull
-        => Provider.GetRequiredService<T>();
+        => provider.GetRequiredService<T>();
 }

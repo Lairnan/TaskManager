@@ -6,7 +6,7 @@
       xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
       xmlns:sys="clr-namespace:System;assembly=System.Runtime"
       xmlns:entity="clr-namespace:TaskManager.Models.Entities"
-      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:controls="clr-namespace:TaskManager.Controls"
       DataContext="{Binding ViewTasksViewModel, Source={StaticResource VmLocator}}"
       mc:Ignorable="d"
       d:DesignHeight="450"
@@ -98,18 +98,18 @@
                                TextWrapping="Wrap"
                                Margin="0 7 0 0"
                                Style="{StaticResource TextBlockStyle}" />
-					<ComboBox Style="{StaticResource ComboBoxStyle}"
-							  Width="110"
-							  Margin="5"
-							  ItemsSource="{Binding Source={StaticResource RecurringIntervalValues}}"
-							  SelectedItem="{Binding SelectedTask.Interval, UpdateSourceTrigger=PropertyChanged}">
-						<ComboBox.ItemTemplate>
+					<controls:BaseComboBox Style="{StaticResource ComboBoxStyle}"
+					                       Width="110"
+					                       Margin="5"
+					                       ItemsSource="{Binding Source={StaticResource RecurringIntervalValues}}"
+					                       SelectedItem="{Binding SelectedTask.Interval, UpdateSourceTrigger=PropertyChanged}">
+						<controls:BaseComboBox.ItemTemplate>
 							<DataTemplate>
 								<TextBlock Text="{Binding Converter={StaticResource EnumDescriptionConverter}}"
 										   Style="{StaticResource ComboBoxTextBlockStyle}"/>
 							</DataTemplate>
-						</ComboBox.ItemTemplate>
-					</ComboBox>
+						</controls:BaseComboBox.ItemTemplate>
+					</controls:BaseComboBox>
 				</StackPanel>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <TextBlock Text="Напоминание: "
@@ -117,22 +117,21 @@
                                TextWrapping="Wrap"
                                Margin="0 7 0 0"
                                Style="{StaticResource TextBlockStyle}" />
-                    <xctk:CheckComboBox SelectedItemsOverride="{Binding SelectedTask.WeeklyRecurrenceDays, UpdateSourceTrigger=PropertyChanged}"
-                                        ItemsSource="{Binding Source={StaticResource DayOfWeekValues}}"
-                                        Width="110"
-                                        Margin="5"
-										Background="Transparent"
-										Foreground="White"
-										FontSize="14"
-										Padding="3"
-                                        Delimiter=", ">
-                        <xctk:CheckComboBox.ItemTemplate>
+                    
+                    <controls:MultiSelectComboBox ItemsSource="{Binding Source={StaticResource DayOfWeekValues}}"
+                                                  SelectedItemsOverride="{Binding SelectedTask.WeeklyRecurrenceDays, UpdateSourceTrigger=PropertyChanged}"
+                                                  Width="110"
+                                                  Margin="5" Padding="3"
+                                                  Background="Transparent" Foreground="White"
+                                                  FontSize="14"
+                                                  Delimiter=", ">
+                        <controls:MultiSelectComboBox.ItemTemplate>
                             <DataTemplate>
-								<TextBlock Text="{Binding Converter={StaticResource DayOfWeekRussianConverter}}"
+                                <TextBlock Text="{Binding Converter={StaticResource DayOfWeekRussianConverter}}"
                                            Style="{StaticResource ComboBoxTextBlockStyle}"/>
                             </DataTemplate>
-                        </xctk:CheckComboBox.ItemTemplate>
-                    </xctk:CheckComboBox>
+                        </controls:MultiSelectComboBox.ItemTemplate>
+                    </controls:MultiSelectComboBox>
                 </StackPanel>
             </StackPanel>
 
@@ -236,18 +235,18 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <ComboBox ItemsSource="{Binding TagsCollection, UpdateSourceTrigger=PropertyChanged}"
-                          SelectedItem="{Binding SelectedTag, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                          DisplayMemberPath="Name"
-                          AutomationProperties.AutomationId="TagsCollectionComboBox"
-                          Style="{StaticResource ComboBoxStyle}"
-                          IsEditable="True">
-                    <ComboBox.InputBindings>
+                <controls:BaseComboBox ItemsSource="{Binding TagsCollection, UpdateSourceTrigger=PropertyChanged}"
+                                       SelectedItem="{Binding SelectedTag, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                       DisplayMemberPath="Name"
+                                       AutomationProperties.AutomationId="TagsCollectionComboBox"
+                                       Style="{StaticResource ComboBoxStyle}"
+                                       IsEditable="True">
+                    <controls:BaseComboBox.InputBindings>
                         <KeyBinding Gesture="Enter"
                                     Command="{Binding AddTagToFilterCommand}"
                                     CommandParameter="{Binding SelectedTag}" />
-                    </ComboBox.InputBindings>
-                </ComboBox>
+                    </controls:BaseComboBox.InputBindings>
+                </controls:BaseComboBox>
                 <Button Grid.Column="1"
                         AutomationProperties.AutomationId="AddFilterFromComboBoxButton"
                         Style="{StaticResource MainButtonStyle}"
